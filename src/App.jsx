@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { FaAmazon } from 'react-icons/fa'
 import { FaWhatsapp } from 'react-icons/fa'
 import SectionTitle from './components/SectionTitle'
 import {
@@ -415,12 +416,9 @@ function App() {
             </ul>
             <div className="book-cta-row">
               <button className="btn book-cta">
-                <img
-                  src="/site-assets/logos/amazon.png"
-                  alt=""
-                  aria-hidden="true"
-                  className="amazon-logo"
-                />
+                <span className="amazon-icon" aria-hidden="true">
+                  <FaAmazon />
+                </span>
                 <span>Buy on Amazon →</span>
               </button>
               <span className="book-meta">English & Marathi • ★ 4.8 rating</span>
