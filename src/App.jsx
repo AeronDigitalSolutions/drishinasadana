@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import { FaWhatsapp } from 'react-icons/fa'
 import SectionTitle from './components/SectionTitle'
 import {
   featuredLogos,
@@ -15,6 +16,7 @@ function App() {
   const [mobileNavOpen, setMobileNavOpen] = useState(false)
   const [activeLiveSlide, setActiveLiveSlide] = useState(0)
   const [liveTouchStartX, setLiveTouchStartX] = useState(null)
+  const navRef = useRef(null)
 
   useEffect(() => {
     const id = setInterval(() => {
@@ -58,6 +60,22 @@ function App() {
     }
   }, [])
 
+  useEffect(() => {
+    if (!mobileNavOpen) return
+
+    const onPointerDown = (event) => {
+      if (window.innerWidth > 992) return
+      if (navRef.current && !navRef.current.contains(event.target)) {
+        setMobileNavOpen(false)
+      }
+    }
+
+    document.addEventListener('pointerdown', onPointerDown)
+    return () => {
+      document.removeEventListener('pointerdown', onPointerDown)
+    }
+  }, [mobileNavOpen])
+
   const currentTestimonial = testimonials[activeTestimonial]
   const liveSlides = [
     {
@@ -93,7 +111,7 @@ function App() {
   return (
     <div className="site">
       <header className={`nav-wrap ${mobileNavOpen ? 'nav-open' : ''}`}>
-        <div className="shell nav">
+        <div className="shell nav" ref={navRef}>
           <a href="#" className="brand" aria-label="Ishina Sadana">
             <img src="/site-assets/logos/mainlogo.png" alt="Ishina Sadana" className="brand-logo" />
           </a>
@@ -181,14 +199,6 @@ function App() {
 
       <section className="hero-mobile">
         <div className="shell hero-mobile-shell">
-          <div className="hero-mobile-media reveal">
-            <img
-              src="/site-assets/images/hero-dr-ishinna.png?v=2"
-              alt="Dr. Ishina"
-              className="hero-mobile-image"
-            />
-          </div>
-
           <div className="hero-mobile-copy reveal">
             <p className="kicker">TEDx Speaker • PhD in Human Development</p>
             <h1>
@@ -201,6 +211,17 @@ function App() {
               <span>Empowered Parents.</span>
             </h1>
             <div className="line" />
+          </div>
+
+          <div className="hero-mobile-media reveal">
+            <img
+              src="/site-assets/images/hero-dr-ishinna.png?v=2"
+              alt="Dr. Ishina"
+              className="hero-mobile-image"
+            />
+          </div>
+
+          <div className="hero-mobile-copy hero-mobile-copy-bottom reveal">
             <h3>Meet Dr. Ishina B. Sadana</h3>
             <p>
               Parenting Coach • TEDx Speaker • Bestselling Author.
@@ -356,7 +377,12 @@ function App() {
               <li>Practical strategies you can implement immediately</li>
               <li>Tailored solutions for your family challenges</li>
             </ul>
-            <button className="btn consult-cta">Book Your Private Session →</button>
+            <button className="btn consult-cta">
+              <span className="whatsapp-icon" aria-hidden="true">
+                <FaWhatsapp />
+              </span>
+              <span>Book Your Private Session through WhatsApp</span>
+            </button>
           </div>
         </div>
       </section>

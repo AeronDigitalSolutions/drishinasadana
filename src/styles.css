@@ -8,6 +8,8 @@
   --accent-dark: #bf6d1f;
   --gold: #9f6a35;
   --radius: 18px;
+  --btn-grad-start: #d67e25;
+  --btn-grad-end: #ff7d3e;
 }
 
 * {
@@ -131,7 +133,7 @@ p {
 }
 
 .nav-cta {
-  background: linear-gradient(135deg, #c89b5a, #e3c089);
+  background: linear-gradient(135deg, var(--btn-grad-start), var(--btn-grad-end));
   border-radius: 10px;
   padding: 10px 18px;
   color: white;
@@ -219,7 +221,10 @@ p {
 }
 
 .hero-copy h1 span {
-  color: #c89b5a;
+  background: linear-gradient(135deg, var(--btn-grad-start), var(--btn-grad-end));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 .line {
@@ -291,7 +296,7 @@ p {
 }
 
 .primary {
-  background: linear-gradient(135deg, #c89b5a, #e3c089);
+  background: linear-gradient(135deg, var(--btn-grad-start), var(--btn-grad-end));
   color: #fff;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
 }
@@ -742,7 +747,7 @@ p {
 
 .enroll-btn {
   border: 1px solid #dfc4a5;
-  background: linear-gradient(135deg, #cda369, #e2c394);
+  background: linear-gradient(135deg, var(--btn-grad-start), var(--btn-grad-end));
   color: #fff;
   padding: 10px 16px;
   border-radius: 10px;
@@ -804,7 +809,10 @@ p {
 }
 
 .consult-copy h2 span {
-  color: #b7864f;
+  background: linear-gradient(135deg, var(--btn-grad-start), var(--btn-grad-end));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 .consult-intro {
@@ -844,10 +852,37 @@ p {
   font-size: 1.25rem;
   padding: 16px 30px;
   border-radius: 14px;
-  background: linear-gradient(135deg, #dfd2bf, #f2e9dd);
-  border: 1px solid #eadfce;
-  color: #3d3734;
-  box-shadow: none;
+  background: #25d366;
+  border: 2px solid #25d366;
+  color: #fff;
+  box-shadow: 0 10px 20px rgba(37, 211, 102, 0.24);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.consult-cta:hover {
+  background: #fff;
+  color: #25d366;
+  border-color: #25d366;
+  box-shadow: 0 10px 20px rgba(37, 211, 102, 0.16);
+}
+
+.whatsapp-icon {
+  width: 22px;
+  height: 22px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  color: inherit;
+  flex-shrink: 0;
+}
+
+.whatsapp-icon svg {
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 
 .consult-media {
@@ -1013,7 +1048,10 @@ p {
 }
 
 .book-copy-panel h2 span {
-  color: #b8874e;
+  background: linear-gradient(135deg, var(--btn-grad-start), var(--btn-grad-end));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 .book-intro {
@@ -1062,7 +1100,7 @@ p {
 .book-cta {
   font-size: 2rem;
   padding: 16px 30px;
-  background: linear-gradient(135deg, #c79a5c, #e5c89c);
+  background: linear-gradient(135deg, var(--btn-grad-start), var(--btn-grad-end));
   border-radius: 14px;
   color: #fff;
   box-shadow: 0 10px 24px rgba(95, 68, 44, 0.2);
@@ -1150,7 +1188,10 @@ p {
 
 .live-name {
   display: block;
-  color: #b8874e;
+  background: linear-gradient(135deg, var(--btn-grad-start), var(--btn-grad-end));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 .live-title-line {
@@ -1402,7 +1443,7 @@ p {
   font-weight: 700;
   color: #fff;
   cursor: pointer;
-  background: linear-gradient(135deg, #c89b5a, #e3c089);
+  background: linear-gradient(135deg, var(--btn-grad-start), var(--btn-grad-end));
   box-shadow: 0 10px 22px rgba(95, 68, 44, 0.15);
 }
 
@@ -2231,7 +2272,11 @@ p {
   }
 
   .hero-mobile-copy {
-    margin-top: -2px;
+    margin-top: 0;
+  }
+
+  .hero-mobile-copy-bottom {
+    margin-top: 10px;
   }
 
   .hero-mobile-copy h1 {
