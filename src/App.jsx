@@ -84,7 +84,7 @@ function App() {
     },
     {
       src: '/site-assets/images/booklivesession-2.png',
-      alt: 'Dr. Ishina speaking on stage',
+      alt: 'Dr. Ishinna speaking on stage',
     },
   ]
 
@@ -112,8 +112,8 @@ function App() {
     <div className="site">
       <header className={`nav-wrap ${mobileNavOpen ? 'nav-open' : ''}`}>
         <div className="shell nav" ref={navRef}>
-          <a href="#" className="brand" aria-label="Ishina Sadana">
-            <img src="/site-assets/logos/mainlogo.png" alt="Ishina Sadana" className="brand-logo" />
+          <a href="#" className="brand" aria-label="Ishinna Sadana">
+            <img src="/site-assets/logos/mainlogo.png" alt="Ishinna Sadana" className="brand-logo" />
           </a>
           <button
             type="button"
@@ -157,7 +157,7 @@ function App() {
               <span>Empowered Parents.</span>
             </h1>
             <div className="line" />
-            <h3>Meet Dr. Ishina B. Sadana</h3>
+            <h3>Meet Dr. Ishinna B. Sadana</h3>
             <p>
               Parenting Coach • TEDx Speaker • Bestselling Author
               <br />
@@ -190,7 +190,7 @@ function App() {
             <div className="hero-glow" />
             <img
               src="/site-assets/images/hero-dr-ishinna.png?v=2"
-              alt="Dr. Ishina"
+              alt="Dr. Ishinna"
               className="hero-image"
             />
           </div>
@@ -216,13 +216,13 @@ function App() {
           <div className="hero-mobile-media reveal">
             <img
               src="/site-assets/images/hero-dr-ishinna.png?v=2"
-              alt="Dr. Ishina"
+              alt="Dr. Ishinna"
               className="hero-mobile-image"
             />
           </div>
 
           <div className="hero-mobile-copy hero-mobile-copy-bottom reveal">
-            <h3>Meet Dr. Ishina B. Sadana</h3>
+            <h3>Meet Dr. Ishinna B. Sadana</h3>
             <p>
               Parenting Coach • TEDx Speaker • Bestselling Author.
               <br />
@@ -365,7 +365,7 @@ function App() {
               <br />
               Consultation <span>with</span>
               <br />
-              <span>Dr. Ishina Sadana</span>
+              <span>Dr. Ishinna Sadana</span>
             </h2>
             <p className="consult-intro">
               Get personalized, practical parenting guidance rooted in psychology and real-world
@@ -396,7 +396,7 @@ function App() {
           </article>
 
           <article className="book-copy-panel">
-            <p className="book-kicker">Book by Dr. Ishina</p>
+            <p className="book-kicker">Book by Dr. Ishinna</p>
             <h2>
               The Book That
               <br />
@@ -439,7 +439,7 @@ function App() {
             <p className="live-topline">LIVE WORKSHOPS • SCHOOLS • CORPORATES • PARENT GROUPS</p>
             <h2>
               Book a Live Session with
-              <span className="live-name">Dr. Ishina</span>
+              <span className="live-name">Dr. Ishinna</span>
             </h2>
             <div className="live-title-line" />
             <div className="live-mobile-carousel" aria-label="Live session photos">
@@ -477,7 +477,7 @@ function App() {
               </button>
             </div>
             <p className="live-intro">
-              Dr. Ishina conducts impactful live workshops - both online and offline - for
+              Dr. Ishinna conducts impactful live workshops - both online and offline - for
               schools, corporates, and parent communities across India.
             </p>
             <p className="live-intro">
@@ -517,7 +517,7 @@ function App() {
             <div className="live-photo-card live-photo-overlay">
               <img
                 src="/site-assets/images/booklivesession-2.png"
-                alt="Dr. Ishina speaking"
+                alt="Dr. Ishinna speaking"
               />
             </div>
           </div>
@@ -557,7 +557,7 @@ function App() {
               </button>
             </form>
             <article className="contact-premium-image-card">
-              <img src="/site-assets/images/getintouch.png" alt="Dr. Ishina" />
+              <img src="/site-assets/images/getintouch.png" alt="Dr. Ishinna" />
             </article>
           </div>
         </div>
@@ -568,7 +568,7 @@ function App() {
           <article className="footer-profile">
             <img
               src="/site-assets/logos/mainlogo.png"
-              alt="Ishina Sadana logo"
+              alt="Ishinna Sadana logo"
               className="footer-brand-logo"
             />
             <p>
@@ -609,7 +609,7 @@ function App() {
         </div>
 
         <div className="shell footer-bottom">
-          <p>© {new Date().getFullYear()} Ishina Sadana. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} Ishinna Sadana. All rights reserved.</p>
           <a href="#" className="footer-top" aria-label="Back to top">↑</a>
         </div>
       </footer>

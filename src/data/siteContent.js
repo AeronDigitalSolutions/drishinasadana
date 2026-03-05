@@ -39,7 +39,7 @@ export const testimonials = [
   {
     name: 'Bhargavi R',
     role: 'A Parent',
-    quote: 'Hi Ishina Mam, Please find my testimonial attached:',
+    quote: 'Hi Ishinna Mam, Please find my testimonial attached:',
     body: `Positive parenting coach course is curated well with the syllabus and you have included everything we have to know about parenting. This is the best decision I have made for myself and my daughter. The course not only gave me immense knowledge on how to be a better parent, but it also taught me how better a human I can be by controlling and working on my triggers. This is eye opening for me, and you came as a light.`,
     avatar:
       'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=400&q=80',
@@ -57,7 +57,7 @@ export const testimonials = [
     name: 'Asfia S.',
     role: 'Co-founder of The Perch Montessori Learning',
     quote: 'It’s so rare to find mentors who like to listen more than they like to talk!',
-    body: `Dr. Ishina Sadana is one such coach who believes in learning and growing together. When I enrolled myself into her Positive Parenting workshop, I was sure that it would be very interesting…but little did I expect it to be such a revolutionary and transformational journey for me and my inner self!\n\nThe humble and casual manner in which Dr. Ishina speaks with all of us makes us feel at ease to ask any questions during our sessions. The workshop has deep and insightful content, which is made simple to understand by open and free-flowing discussions. I feel more confident as a parent to 3 young boys, now that I’ve been empowered with the tools that I’m going to need to tackle the obstacles in my parenting journey ahead.\n\nThank you Dr. Ishina, for these amazing 2 months of learning! Forever grateful.`,
+    body: `Dr. Ishinna Sadana is one such coach who believes in learning and growing together. When I enrolled myself into her Positive Parenting workshop, I was sure that it would be very interesting…but little did I expect it to be such a revolutionary and transformational journey for me and my inner self!\n\nThe humble and casual manner in which Dr. Ishinna speaks with all of us makes us feel at ease to ask any questions during our sessions. The workshop has deep and insightful content, which is made simple to understand by open and free-flowing discussions. I feel more confident as a parent to 3 young boys, now that I’ve been empowered with the tools that I’m going to need to tackle the obstacles in my parenting journey ahead.\n\nThank you Dr. Ishinna, for these amazing 2 months of learning! Forever grateful.`,
     avatar:
       'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=400&q=80',
   },
