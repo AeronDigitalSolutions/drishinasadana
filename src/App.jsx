@@ -1,37 +1,10 @@
-import { useEffect, useRef, useState } from 'react'
-import { FaAmazon } from 'react-icons/fa'
-import { FaWhatsapp } from 'react-icons/fa'
-import SectionTitle from './components/SectionTitle'
-import {
-  featuredLogos,
-  heroMediaLogos,
-  liveBenefits,
-  liveStats,
-  programFAQs,
-  testimonials,
-  workshopCards,
-} from './data/siteContent'
+import { useEffect, useState } from 'react'
+import { FaChevronDown, FaChevronUp, FaSearch } from 'react-icons/fa'
 
 function App() {
-  const [activeTestimonial, setActiveTestimonial] = useState(0)
   const [mobileNavOpen, setMobileNavOpen] = useState(false)
-  const [activeLiveSlide, setActiveLiveSlide] = useState(0)
-  const [liveTouchStartX, setLiveTouchStartX] = useState(null)
-  const navRef = useRef(null)
-
-  useEffect(() => {
-    const id = setInterval(() => {
-      setActiveTestimonial((prev) => (prev + 1) % testimonials.length)
-    }, 5500)
-    return () => clearInterval(id)
-  }, [])
-
-  useEffect(() => {
-    const id = setInterval(() => {
-      setActiveLiveSlide((prev) => (prev + 1) % 2)
-    }, 2500)
-    return () => clearInterval(id)
-  }, [])
+  const [aboutOpen, setAboutOpen] = useState(0)
+  const [faqOpen, setFaqOpen] = useState(0)
 
   useEffect(() => {
     document.body.style.overflow = mobileNavOpen ? 'hidden' : ''
@@ -47,75 +20,19 @@ function App() {
       }
     }
 
-    const onKeyDown = (event) => {
-      if (event.key === 'Escape') {
-        setMobileNavOpen(false)
-      }
-    }
-
+    onResize()
     window.addEventListener('resize', onResize)
-    window.addEventListener('keydown', onKeyDown)
-    return () => {
-      window.removeEventListener('resize', onResize)
-      window.removeEventListener('keydown', onKeyDown)
-    }
+    return () => window.removeEventListener('resize', onResize)
   }, [])
 
-  useEffect(() => {
-    if (!mobileNavOpen) return
-
-    const onPointerDown = (event) => {
-      if (window.innerWidth > 992) return
-      if (navRef.current && !navRef.current.contains(event.target)) {
-        setMobileNavOpen(false)
-      }
-    }
-
-    document.addEventListener('pointerdown', onPointerDown)
-    return () => {
-      document.removeEventListener('pointerdown', onPointerDown)
-    }
-  }, [mobileNavOpen])
-
-  const currentTestimonial = testimonials[activeTestimonial]
-  const liveSlides = [
-    {
-      src: '/site-assets/images/booklivesession-1.png',
-      alt: 'Live workshop audience',
-    },
-    {
-      src: '/site-assets/images/booklivesession-2.png',
-      alt: 'Dr. Ishinna speaking on stage',
-    },
-  ]
-
-  const goPrev = () =>
-    setActiveTestimonial((prev) => (prev - 1 + testimonials.length) % testimonials.length)
-  const goNext = () => setActiveTestimonial((prev) => (prev + 1) % testimonials.length)
-  const goPrevLive = () => setActiveLiveSlide((prev) => (prev - 1 + liveSlides.length) % liveSlides.length)
-  const goNextLive = () => setActiveLiveSlide((prev) => (prev + 1) % liveSlides.length)
-
-  const onLiveTouchStart = (event) => {
-    setLiveTouchStartX(event.touches[0].clientX)
-  }
-
-  const onLiveTouchEnd = (event) => {
-    if (liveTouchStartX === null) return
-    const delta = event.changedTouches[0].clientX - liveTouchStartX
-    if (Math.abs(delta) > 35) {
-      if (delta < 0) goNextLive()
-      if (delta > 0) goPrevLive()
-    }
-    setLiveTouchStartX(null)
-  }
-
   return (
-    <div className="site">
+    <div className="site gc-mode" id="top">
       <header className={`nav-wrap ${mobileNavOpen ? 'nav-open' : ''}`}>
-        <div className="shell nav" ref={navRef}>
-          <a href="#" className="brand" aria-label="Ishinna Sadana">
+        <div className="shell nav">
+          <a href="#top" className="brand" aria-label="Ishinna Sadana">
             <img src="/site-assets/logos/mainlogo.png" alt="Ishinna Sadana" className="brand-logo" />
           </a>
+
           <button
             type="button"
             className={`nav-toggle ${mobileNavOpen ? 'open' : ''}`}
@@ -127,15 +44,21 @@ function App() {
             <span className="nav-toggle-bar" />
             <span className="nav-toggle-bar" />
           </button>
+
           <nav className={`links ${mobileNavOpen ? 'open' : ''}`}>
-            <a href="#" onClick={() => setMobileNavOpen(false)}>Home</a>
-            <a href="#program" onClick={() => setMobileNavOpen(false)}>Programs</a>
-            <a href="#about" onClick={() => setMobileNavOpen(false)}>About</a>
-            <a href="#workshops" onClick={() => setMobileNavOpen(false)}>Workshops</a>
-            <a href="#contact" onClick={() => setMobileNavOpen(false)}>Contact</a>
-            <button className="nav-cta" type="button">Get Certified</button>
+            <a href="#top" onClick={() => setMobileNavOpen(false)}>Home</a>
+            <a href="#top" className="active" onClick={() => setMobileNavOpen(false)}>Get Certified</a>
+            <a href="#faq" onClick={() => setMobileNavOpen(false)}>Workshops</a>
+            <a href="#about-program" onClick={() => setMobileNavOpen(false)}>About</a>
+            <a href="#download-outline" onClick={() => setMobileNavOpen(false)}>Book</a>
+            <a href="#faq" onClick={() => setMobileNavOpen(false)}>Free Resources</a>
+            <a href="#contact-form" onClick={() => setMobileNavOpen(false)}>My Account</a>
+            <button className="nav-search" type="button" aria-label="Search">
+              <FaSearch />
+            </button>
           </nav>
         </div>
+
         <button
           type="button"
           className={`nav-backdrop ${mobileNavOpen ? 'open' : ''}`}
@@ -144,422 +67,187 @@ function App() {
         />
       </header>
 
-      <section className="hero hero-desktop">
-        <div className="shell hero-grid">
-          <div className="hero-copy reveal">
-            <p className="kicker">TEDx Speaker • PhD in Human Development</p>
-            <h1>
-              Raising Confident,
-              <br />
-              Emotionally Strong
-              <br />
-              Children Start With
-              <br />
-              <span>Empowered Parents.</span>
-            </h1>
-            <div className="line" />
-            <h3>Meet Dr. Ishinna B. Sadana</h3>
+      <main className="gc-main">
+        <section className="gc-hero">
+          <div className="shell gc-hero-shell">
+            <h1>Positive Parenting Coach Program</h1>
             <p>
-              Parenting Coach • TEDx Speaker • Bestselling Author
-              <br />
-              Blending academic research with real motherhood
-              <br />
-              to help parents raise emotionally resilient children.
+              This program is a two-month journey that aims to have more conscious parents and
+              create well informed parent coaches who can effectively help many more parents and
+              bring changes in their own lives.
             </p>
-            <ul className="checks">
-              <li>Guided 10,000+ parents globally</li>
-              <li>PhD & M.Sc in Human Development</li>
-              <li>Creator of Certified Parenting Programs</li>
-            </ul>
-            <div className="cta-row hero-cta-row">
-              <button className="btn primary">Explore Certifications</button>
-              <button className="btn ghost">Watch My Story →</button>
-            </div>
-            <div className="hero-media-strip">
-              <p>As Seen On</p>
-              <div className="hero-logo-marquee">
-                <div className="hero-logo-track">
-                  {[...heroMediaLogos, ...heroMediaLogos].map((logo, idx) => (
-                    <img key={`${logo.alt}-${idx}`} src={logo.src} alt={logo.alt} loading="lazy" />
-                  ))}
-                </div>
-              </div>
-            </div>
           </div>
+        </section>
 
-          <div className="hero-media reveal">
-            <div className="hero-glow" />
-            <img
-              src="/site-assets/images/hero-dr-ishinna.png?v=2"
-              alt="Dr. Ishinna"
-              className="hero-image"
-            />
-          </div>
-        </div>
-      </section>
-
-      <section className="hero-mobile">
-        <div className="shell hero-mobile-shell">
-          <div className="hero-mobile-copy reveal">
-            <p className="kicker">TEDx Speaker • PhD in Human Development</p>
-            <h1>
-              Raising Confident,
-              <br />
-              Emotionally Strong
-              <br />
-              Children Start With
-              <br />
-              <span>Empowered Parents.</span>
-            </h1>
-            <div className="line" />
-          </div>
-
-          <div className="hero-mobile-media reveal">
-            <img
-              src="/site-assets/images/hero-dr-ishinna.png?v=2"
-              alt="Dr. Ishinna"
-              className="hero-mobile-image"
-            />
-          </div>
-
-          <div className="hero-mobile-copy hero-mobile-copy-bottom reveal">
-            <h3>Meet Dr. Ishinna B. Sadana</h3>
-            <p>
-              Parenting Coach • TEDx Speaker • Bestselling Author.
-              <br />
-              Blending academic research with real motherhood
-              <br />
-              to help parents raise emotionally resilient children.
-            </p>
-            <ul className="checks">
-              <li>Guided 10,000+ parents globally</li>
-              <li>PhD & M.Sc in Human Development</li>
-              <li>Creator of Certified Parenting Programs</li>
-            </ul>
-
-            <div className="hero-mobile-cta">
-              <button className="btn primary">Explore Certifications</button>
-              <button className="btn ghost">Watch My Story →</button>
-            </div>
-
-          </div>
-        </div>
-      </section>
-
-      <section id="program" className="panel shell reveal">
-        <SectionTitle overline="Flagship Program" title="Positive Parenting Coach Program" />
-        <div className="program-grid">
-          <article className="testimonial-slider card">
-            <div key={activeTestimonial} className="testi-slide">
-              <div className="testi-head">
-                <h4>{currentTestimonial.name}</h4>
-                <p>{currentTestimonial.role}</p>
-              </div>
-              <img
-                src={currentTestimonial.avatar}
-                alt={currentTestimonial.name}
-                className="testi-avatar"
-              />
-              <p className="quote">“{currentTestimonial.quote}”</p>
-              <p className="testi-body">{currentTestimonial.body}</p>
-            </div>
-            <div className="testi-controls">
-              <button type="button" onClick={goPrev} aria-label="Previous testimonial" className="testi-nav">
-                ←
-              </button>
-              <div className="testi-dots">
-                {testimonials.map((item, idx) => (
-                  <button
-                    key={item.name}
-                    type="button"
-                    aria-label={`Go to testimonial ${idx + 1}`}
-                    className={`dot ${idx === activeTestimonial ? 'active' : ''}`}
-                    onClick={() => setActiveTestimonial(idx)}
-                  />
-                ))}
-              </div>
-              <button type="button" onClick={goNext} aria-label="Next testimonial" className="testi-nav">
-                →
-              </button>
-            </div>
-          </article>
-          <article className="card about-program">
-            <h3>About The Program</h3>
-            <p>
-              A two-month journey designed to help conscious parents become informed and effective
-              parent coaches.
-            </p>
-            <div className="faq-list">
-              {programFAQs.map((item) => (
-                <div key={item} className="faq-item">
-                  <span>{item}</span>
-                  <span>+</span>
-                </div>
-              ))}
-            </div>
-            <div className="cta-row">
-              <button className="btn primary">Enroll Now</button>
-              <button className="btn ghost">Know More →</button>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <section id="workshops" className="workshops-section reveal">
-        <div className="shell workshops-shell">
-          <SectionTitle
-            overline="Workshops"
-            title="Our Parenting Workshops"
-            subtitle="Practical, science-backed sessions to help you build connection, discipline, and emotional resilience."
-          />
-
-          <div className="journey-row">
-            <span>1. WhatsApp Us</span>
-            <span>2. Request Recorded Workshops</span>
-            <span>3. Get Instant Lifetime Access</span>
-          </div>
-
-          <div className="cta-row center">
-            <button className="btn primary">Get Workshop Access →</button>
-            <button className="btn ghost">View All Workshops</button>
-          </div>
-
-          <div className="cards-grid">
-            {workshopCards.map((card) => (
-              <article key={card.title} className="workshop card">
-                <span className="tag">{card.tag}</span>
-                <h4>{card.title}</h4>
-                <p>{card.copy}</p>
-                <img src={card.image} alt={card.title} />
-                <div className="price-row">
-                  <strong className="price-pill">{card.price}</strong>
-                  <button type="button" className="enroll-btn">Enroll Now →</button>
-                </div>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="consult-section reveal">
-        <div className="shell consult-grid">
-          <div className="consult-media">
-            <img src="/site-assets/images/one-on-one.png" alt="One-on-one consultation" />
-            <div className="consult-price-card consult-price-card-side" role="note" aria-label="Consultation pricing">
-              <span className="consult-price-kicker">Private Session Fee</span>
-              <div className="consult-price-main">
-                <span className="consult-currency">₹</span>
-                <strong>4,999</strong>
-              </div>
-              <p className="consult-duration">75-minute one-on-one consultation</p>
-              <div className="consult-price-tags">
-                <span>Personalized Guidance</span>
-                <span>Actionable Plan</span>
-              </div>
-            </div>
-          </div>
-
-          <div className="consult-copy">
-            <p className="consult-kicker">Private Consultation</p>
-            <h2>
-              One-on-One Parenting
-              <br />
-              Consultation <span>with</span>
-              <br />
-              <span>Dr. Ishinna Sadana</span>
-            </h2>
-            <p className="consult-intro">
-              Get personalized, practical parenting guidance rooted in psychology and real-world
-              family experience.
-            </p>
-            <ul className="consult-points">
-              <li>Safe and confidential discussion space</li>
-              <li>75-minute personalized parenting guidance</li>
-              <li>Practical strategies you can implement immediately</li>
-              <li>Tailored solutions for your family challenges</li>
-            </ul>
-            <button className="btn consult-cta">
-              <span className="whatsapp-icon" aria-hidden="true">
-                <FaWhatsapp />
-              </span>
-              <span>Book Your Private Session through WhatsApp</span>
-            </button>
-          </div>
-        </div>
-      </section>
-
-      <section id="book" className="book-premium-section reveal">
-        <div className="shell book-premium-grid">
-          <article className="book-media-panel">
-            <div className="book-media-stage">
-              <img src="/site-assets/images/book.png" alt="Power To The Parent book" />
-            </div>
-          </article>
-
-          <article className="book-copy-panel">
-            <p className="book-kicker">Book by Dr. Ishinna</p>
-            <h2>
-              The Book That
-              <br />
-              Changed Thousands
-              <br />
-              of Parenting <span>Journeys</span>
-            </h2>
-            <p className="book-intro">
-              <strong>‘Power To The Parent’</strong> is a practical guide to everyday parenting
-              with confidence, clarity, and emotional strength.
-            </p>
-            <ul className="book-points">
-              <li>Build stronger parent-child connection</li>
-              <li>Set boundaries without guilt</li>
-              <li>Raise confident, emotionally secure kids</li>
-            </ul>
-            <div className="book-cta-row">
-              <button className="btn book-cta">
-                <span className="amazon-icon" aria-hidden="true">
-                  <FaAmazon />
-                </span>
-                <span>Buy on Amazon →</span>
-              </button>
-              <span className="book-meta">English & Marathi • ★ 4.8 rating</span>
-            </div>
-            <div className="book-price-tag">
-              <strong>₹4,999</strong>
-              <span>75-minute consultation</span>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <section className="live-session-section reveal">
-        <div className="shell live-wrap">
-          <div className="live-copy">
-            <p className="live-topline">LIVE WORKSHOPS • SCHOOLS • CORPORATES • PARENT GROUPS</p>
-            <h2>
-              Book a Live Session with
-              <span className="live-name">Dr. Ishinna</span>
-            </h2>
-            <div className="live-title-line" />
-            <div className="live-mobile-carousel" aria-label="Live session photos">
-              <div
-                className="live-mobile-window"
-                onTouchStart={onLiveTouchStart}
-                onTouchEnd={onLiveTouchEnd}
-              >
-                <div
-                  className="live-mobile-track"
-                  style={{ transform: `translateX(-${activeLiveSlide * 100}%)` }}
-                >
-                  {liveSlides.map((slide) => (
-                    <article className="live-mobile-slide" key={slide.src}>
-                      <img src={slide.src} alt={slide.alt} />
-                    </article>
-                  ))}
-                </div>
-              </div>
-              <button
-                type="button"
-                className="live-mobile-arrow prev"
-                aria-label="Previous live photo"
-                onClick={goPrevLive}
-              >
-                ←
-              </button>
-              <button
-                type="button"
-                className="live-mobile-arrow next"
-                aria-label="Next live photo"
-                onClick={goNextLive}
-              >
-                →
-              </button>
-            </div>
-            <p className="live-intro">
-              Dr. Ishinna conducts impactful live workshops - both online and offline - for
-              schools, corporates, and parent communities across India.
-            </p>
-            <p className="live-intro">
-              Her sessions combine research-backed psychology with real-life parenting
-              experiences, creating deep transformation and practical change.
+        <section id="about-program" className="gc-about">
+          <div className="shell">
+            <h2>About The Program</h2>
+            <p className="gc-about-intro">
+              This program is a two-month journey that aims to have more conscious Parents and
+              create well informed Parent Coaches who can effectively help many more parents and
+              bring changes in their own lives.
             </p>
 
-            <h3 className="live-subhead">What You Get:</h3>
-            <div className="live-benefits-grid">
-              {liveBenefits.map((benefit) => (
-                <article key={benefit.title} className="live-benefit-card">
-                  <h4>{benefit.title}</h4>
-                  <p>{benefit.text}</p>
+            <div className="gc-about-accordion">
+              {[].map((item, idx) => {
+                const isOpen = aboutOpen === idx
+                return (
+                  <article className="gc-accordion-item" key={item.title}>
+                    <button
+                      type="button"
+                      className="gc-accordion-trigger"
+                      onClick={() => setAboutOpen((prev) => (prev === idx ? null : idx))}
+                      aria-expanded={isOpen}
+                    >
+                      <span className="gc-trigger-left">»</span>
+                      <span>{item.title}</span>
+                      <span className="gc-trigger-icon">{isOpen ? '−' : '+'}</span>
+                    </button>
+                    {isOpen && (
+                      <div className="gc-accordion-content">
+                        {item.paragraphs?.map((para) => (
+                          <p key={para}>{para}</p>
+                        ))}
+                        {item.points?.length ? (
+                          <ol>
+                            {item.points.map((point) => (
+                              <li key={point}>{point}</li>
+                            ))}
+                          </ol>
+                        ) : null}
+                      </div>
+                    )}
+                  </article>
+                )
+              })}
+            </div>
+
+            <div className="gc-about-actions">
+              <button type="button" className="gc-btn gc-btn-primary">Enroll Now</button>
+              <button type="button" className="gc-btn gc-btn-outline">Know More</button>
+            </div>
+          </div>
+        </section>
+
+        <section className="gc-value-props">
+          <div className="shell">
+            <h2>What Do You Get?</h2>
+            <div className="gc-props-grid">
+              {getCertifiedValueProps.map((item) => (
+                <article className="gc-prop-row" key={item.title}>
+                  <h3>{item.title}</h3>
+                  <p>{item.description}</p>
                 </article>
               ))}
             </div>
-
-            <div className="live-stats">
-              {liveStats.map((stat) => (
-                <span key={stat}>{stat}</span>
-              ))}
-            </div>
-
-            <div className="cta-row">
-              <button className="btn primary">Book a Live Session</button>
-              <span className="meta">For schools, institutions & organizations</span>
-            </div>
           </div>
+        </section>
 
-          <div className="live-media">
-            <div className="live-photo-card live-photo-main">
-              <img
-                src="/site-assets/images/booklivesession-1.png"
-                alt="Live workshop audience"
-              />
-            </div>
-            <div className="live-photo-card live-photo-overlay">
-              <img
-                src="/site-assets/images/booklivesession-2.png"
-                alt="Dr. Ishinna speaking"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
+        <section id="contact-form" className="gc-lead-form">
+          <div className="shell gc-lead-grid">
+            <article className="gc-lead-image">
+              <img src="/site-assets/images/getintouch.png" alt="Certification inquiry" />
+            </article>
 
-      <section className="shell reveal">
-        <SectionTitle title="Featured In" />
-        <div className="featured-logos card">
-          <div className="logo-marquee">
-            <div className="logo-track">
-              {[...featuredLogos, ...featuredLogos].map((logo, idx) => (
-                <div className="logo-item" key={`${logo.alt}-${idx}`}>
-                  <img src={logo.src} alt={logo.alt} loading="lazy" />
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
+            <article className="gc-lead-card">
+              <h3>Next Two Months PPC batch starting in: February 2026</h3>
+              <p>
+                If you are interested in enrolling for the program, fill out our quick form and we
+                will get in touch with you.
+              </p>
+              <strong>Take the first step today!</strong>
 
-      <section id="contact" className="contact-premium-section reveal">
-        <div className="shell contact-premium-wrap">
-          <div className="contact-premium-grid">
-            <form className="contact-premium-form">
-              <h2>Get In Touch</h2>
-              <label>Name *</label>
-              <input type="text" />
-              <label>Email *</label>
-              <input type="email" />
-              <label>Phone *</label>
-              <input type="tel" />
-              <label>Message</label>
-              <textarea rows="4" />
-              <button type="button" className="contact-submit-btn">
-                Submit
-              </button>
-            </form>
-            <article className="contact-premium-image-card">
-              <img src="/site-assets/images/getintouch.png" alt="Dr. Ishinna" />
+              <form onSubmit={(event) => event.preventDefault()}>
+                <label htmlFor="lead-name">Name *</label>
+                <input id="lead-name" type="text" required />
+
+                <label htmlFor="lead-email">Email *</label>
+                <input id="lead-email" type="email" required />
+
+                <label htmlFor="lead-phone">Phone *</label>
+                <input id="lead-phone" type="tel" required />
+
+                <label htmlFor="lead-message">Message</label>
+                <textarea id="lead-message" rows="5" />
+
+                <button type="submit" className="gc-btn gc-btn-primary">Submit</button>
+              </form>
             </article>
           </div>
-        </div>
-      </section>
+        </section>
+
+        <section id="download-outline" className="gc-outline">
+          <div className="shell">
+            <article className="gc-outline-card">
+              <h3>Download Course Outline</h3>
+              <form onSubmit={(event) => event.preventDefault()}>
+                <label htmlFor="outline-name">Full Name *</label>
+                <input id="outline-name" type="text" required />
+
+                <div className="gc-outline-row">
+                  <div>
+                    <label htmlFor="outline-email">Email *</label>
+                    <input id="outline-email" type="email" required />
+                  </div>
+                  <div>
+                    <label htmlFor="outline-phone">Phone *</label>
+                    <input id="outline-phone" type="tel" required />
+                  </div>
+                </div>
+
+                <button type="submit" className="gc-btn gc-btn-primary">Download</button>
+              </form>
+            </article>
+          </div>
+        </section>
+
+        <section className="gc-certified-coaches">
+          <div className="shell">
+            <h2>Meet Our Certified Positive Parent Coaches</h2>
+            <div className="gc-coach-collage">
+              {certifiedCoachPhotos.map((img, idx) => (
+                <img src={img} alt={`Certified coach ${idx + 1}`} key={`${img}-${idx}`} loading="lazy" />
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="gc-feedback">
+          <div className="shell">
+            <h2>PPC Program Feedback</h2>
+            <div className="gc-feedback-grid">
+              {getCertifiedFeedback.map((item) => (
+                <article key={item} className="gc-video-card" aria-label={item} />
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="faq" className="gc-faq">
+          <div className="shell">
+            <h2>Frequently Asked Questions</h2>
+            <div className="gc-faq-list">
+              {getCertifiedFaqs.map((item, idx) => {
+                const isOpen = faqOpen === idx
+                return (
+                  <article className="gc-faq-item" key={item.q}>
+                    <button
+                      className="gc-faq-trigger"
+                      type="button"
+                      onClick={() => setFaqOpen((prev) => (prev === idx ? null : idx))}
+                      aria-expanded={isOpen}
+                    >
+                      <span>{`${idx + 1}. ${item.q}`}</span>
+                      {isOpen ? <FaChevronUp /> : <FaChevronDown />}
+                    </button>
+                    {isOpen ? <p>{item.a}</p> : null}
+                  </article>
+                )
+              })}
+            </div>
+          </div>
+        </section>
+      </main>
 
       <footer className="footer">
         <div className="shell footer-inner">
@@ -574,30 +262,30 @@ function App() {
               mom of two. Helping parents shift from self-doubt to deep connection with practical,
               science-backed strategies.
             </p>
-            <a href="#about">About Us →</a>
+            <a href="#about-program">About Us →</a>
           </article>
 
           <article className="footer-col">
             <h4>Top Links</h4>
-            <a href="#">Home</a>
-            <a href="#book">Power To The Parent</a>
-            <a href="#program">PPC Program</a>
-            <a href="#workshops">Workshop</a>
+            <a href="#top">Home</a>
+            <a href="#about-program">PPC Program</a>
+            <a href="#contact-form">Get Certified</a>
+            <a href="#faq">Workshop</a>
           </article>
 
           <article className="footer-col">
             <h4>Support</h4>
-            <a href="#">FAQs</a>
-            <a href="#about">About Us</a>
+            <a href="#faq">FAQs</a>
+            <a href="#about-program">About Us</a>
             <a href="#">Use Of Terms</a>
             <a href="#">Privacy Policy</a>
           </article>
 
           <article className="footer-col">
-            <h4>Top Categories</h4>
+            <h4>Social</h4>
             <a href="#">LinkedIn</a>
             <a href="#">Instagram</a>
-            <a href="#">Youtube</a>
+            <a href="#">YouTube</a>
           </article>
 
           <article className="footer-contact">
@@ -608,9 +296,11 @@ function App() {
 
         <div className="shell footer-bottom">
           <p>© {new Date().getFullYear()} Ishinna Sadana. All rights reserved.</p>
-          <a href="#" className="footer-top" aria-label="Back to top">↑</a>
+          <a href="#top" className="footer-top" aria-label="Back to top">↑</a>
         </div>
       </footer>
+
+      <a href="#top" className="gc-floating-top" aria-label="Back to top">↑</a>
     </div>
   )
 }
