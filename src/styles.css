@@ -1057,7 +1057,7 @@ p {
 }
 
 .book-copy-panel h2 {
-  font-size: clamp(2.8rem, 4vw, 5.7rem);
+  font-size: clamp(2.8rem, 3vw, 5.7rem);
   line-height: 1.05;
 }
 
@@ -1112,7 +1112,7 @@ p {
 }
 
 .book-cta {
-  font-size: 2rem;
+  font-size: 1.7rem;
   padding: 16px 30px;
   background: linear-gradient(135deg, var(--btn-grad-start), var(--btn-grad-end));
   border-radius: 14px;
@@ -1145,7 +1145,7 @@ p {
 
 .book-meta {
   color: #61544d;
-  font-size: 1.5rem;
+  font-size: 1.1rem;
 }
 
 .book-price-tag {
@@ -1434,7 +1434,7 @@ p {
 }
 
 .contact-premium-form h2 {
-  font-size: clamp(2.6rem, 4vw, 4.2rem);
+  font-size: clamp(2.6rem, 2vw, 4.2rem);
   margin-bottom: 6px;
 }
 
