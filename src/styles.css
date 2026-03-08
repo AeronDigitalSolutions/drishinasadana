@@ -214,7 +214,7 @@ p {
 }
 
 .hero-copy h1 {
-  font-size: clamp(2.6rem, 5vw, 64px);
+  font-size: clamp(2.6rem, 5vw, 55px);
   line-height: 1.1;
   font-weight: 600;
   max-width: 760px;
@@ -278,6 +278,7 @@ p {
   align-items: center;
   gap: 16px;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 .btn {
@@ -444,7 +445,7 @@ p {
 }
 
 .section-title h2 {
-  font-size: clamp(2rem, 4vw, 3.7rem);
+  font-size: clamp(2rem, 4vw, 2.8rem);
 }
 
 .subtitle {
@@ -504,10 +505,11 @@ p {
 .testimonial-slider {
   position: relative;
   min-height: 0;
-  height: auto;
+  height: 50vh;
   display: flex;
   flex-direction: column;
   align-self: start;
+  justify-content: center;
 }
 
 .testi-slide {
@@ -604,7 +606,7 @@ p {
 
 .about-program {
   min-height: 0;
-  height: auto;
+  height: 50vh;
   display: flex;
   flex-direction: column;
   align-self: start;
@@ -702,7 +704,7 @@ p {
 }
 
 .workshop h4 {
-  font-size: clamp(2rem, 2.2vw, 2.45rem);
+  font-size: clamp(1.3rem, 1.2vw, 2.45rem);
   margin: 10px 0 6px;
   line-height: 1.05;
   min-height: 2.15em;
@@ -1207,7 +1209,7 @@ p {
 
 .live-copy h2 {
   margin-top: 10px;
-  font-size: clamp(2.8rem, 4.6vw, 5rem);
+  font-size: clamp(2.8rem, 2.6vw, 5rem);
   line-height: 1.05;
 }
 
@@ -1241,7 +1243,7 @@ p {
   margin-top: 14px;
   margin-bottom: 10px;
   font-family: 'Inter', sans-serif;
-  font-size: 2.6rem;
+  font-size: 1.9rem;
   font-weight: 700;
   color: #463b36;
 }
@@ -2591,4 +2593,3 @@ p {
     font-size: clamp(0.95rem, 5.6vw, 1.12rem);
   }
 }
-
