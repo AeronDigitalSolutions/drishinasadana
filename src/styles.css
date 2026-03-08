@@ -505,7 +505,7 @@ p {
 .testimonial-slider {
   position: relative;
   min-height: 0;
-  height: 50vh;
+  height: 55vh;
   display: flex;
   flex-direction: column;
   align-self: start;
@@ -606,10 +606,11 @@ p {
 
 .about-program {
   min-height: 0;
-  height: 50vh;
+  height: 55vh;
   display: flex;
   flex-direction: column;
   align-self: start;
+  justify-content: center;
 }
 
 @media (min-width: 769px) {
