@@ -1,0 +1,350 @@
+/* ==========================================================
+   WORKSHOPS PAGE
+   ========================================================== */
+.page-workshops {
+  background-color: transparent;
+  min-height: 100vh;
+}
+
+/* Workshops Hero */
+.work-hero-section {
+  background-color: #fdfaf6;
+  padding: 80px 0 60px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle curved background matching the screenshot */
+.work-hero-section::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  right: -20%;
+  width: 60%;
+  height: 200%;
+  background: radial-gradient(circle at center, rgba(246, 170, 64, 0.05) 0%, transparent 60%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.work-hero-shell {
+  max-width: 900px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.work-hero-title {
+  color: var(--text);
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 5vw, 2.8rem);
+  font-weight: 700;
+  margin-bottom: 24px;
+}
+
+.work-hero-subtitle {
+  color: var(--muted);
+  font-family: 'Inter', sans-serif;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Workshops Steps */
+.work-steps-section {
+  padding: 60px 0;
+  background-color: transparent;
+  text-align: center;
+}
+
+.work-steps-shell {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.work-steps-title {
+  color: #1a4f8b;
+  /* Blue color from screenshot */
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(1.4rem, 3vw, 1.8rem);
+  font-weight: 600;
+  margin-bottom: 40px;
+}
+
+.work-steps-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.work-step-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.work-step-label {
+  color: #1a4f8b;
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin-bottom: 12px;
+}
+
+.work-step-action {
+  background: #fdfdfd;
+  border: 1px solid #1a4f8b;
+  border-radius: 30px;
+  padding: 14px 24px;
+  font-weight: 600;
+  color: #111;
+  width: 100%;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
+}
+
+@media (max-width: 768px) {
+  .work-steps-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+}
+
+/* Workshop List */
+.work-list-section {
+  padding: 40px 0 80px;
+  background-color: transparent;
+}
+
+.work-list-shell {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+}
+
+.work-item {
+  display: grid;
+  grid-template-columns: 350px 1fr auto;
+  gap: 40px;
+  align-items: center;
+}
+
+.work-item-image-col {
+  border-radius: 20px;
+  overflow: hidden;
+  height: 350px;
+}
+
+.work-item-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.work-item-content-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.work-item-title {
+  color: #f17244;
+  /* Orange text */
+  font-family: 'Inter', sans-serif;
+  font-size: 2.2rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.work-item-fee {
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+  padding-left: 12px;
+}
+
+/* Vertical pink bar indicator next to fee */
+.work-item-fee::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 20px;
+  background-color: #ea3f60;
+  border-radius: 2px;
+}
+
+.work-fee-text {
+  color: #f17244;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.work-fee-buy {
+  color: #f17244;
+  font-weight: 700;
+  font-size: 1.1rem;
+  border-bottom: 2px solid #f17244;
+  cursor: pointer;
+}
+
+.work-item-learn-heading {
+  color: #444;
+  font-weight: 500;
+  margin-bottom: 12px;
+}
+
+.work-item-points {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.work-item-points li {
+  position: relative;
+  padding-left: 20px;
+  margin-bottom: 10px;
+  color: #444;
+  line-height: 1.4;
+}
+
+.work-item-points li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: #888;
+  font-size: 1.2rem;
+}
+
+.work-item-number-col {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.work-number-circle {
+  width: 60px;
+  height: 60px;
+  border: 2px solid #1a1e43;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #111;
+}
+
+/* Pattern: alternating dark blue and outline circles */
+.work-item:nth-child(even) .work-number-circle {
+  background-color: #0b102f;
+  border-color: #0b102f;
+  color: #fff;
+}
+
+@media (max-width: 992px) {
+  .work-item {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .work-item-image-col {
+    height: auto;
+    max-height: 400px;
+  }
+
+  .work-item-number-col {
+    justify-content: flex-start;
+  }
+}
+
+/* Workshop Bundle Banner */
+.work-bundle-section {
+  padding: 40px 0 80px;
+  background-color: #fcfcfc;
+}
+
+.work-bundle-shell {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.work-bundle-content {
+  background: #f7f6f5;
+  border: 1px solid #e8e8e8;
+  border-radius: 0;
+  /* Boxy edge matching screenshot */
+  padding: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 40px;
+}
+
+.work-bundle-text h2 {
+  color: #0d204a;
+  /* Deep navy blue */
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(2.2rem, 4vw, 3.2rem);
+  font-weight: 700;
+  margin-bottom: 16px;
+  line-height: 1.1;
+}
+
+.work-bundle-text p {
+  color: #222;
+  font-size: 1.2rem;
+  line-height: 1.5;
+  max-width: 400px;
+}
+
+.work-bundle-cta-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.work-bundle-price-badge {
+  background: #ff5f1f;
+  /* Vibrant orange */
+  color: #fff;
+  padding: 24px 40px;
+  border-radius: 50px;
+  font-size: 1.8rem;
+  font-weight: 700;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(255, 95, 31, 0.3);
+}
+
+.work-bundle-btn {
+  background: transparent;
+  color: #0d204a;
+  border: none;
+  font-size: 1.4rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.work-bundle-btn:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .work-bundle-content {
+    flex-direction: column;
+    text-align: center;
+    padding: 40px 20px;
+  }
+
+  .work-bundle-text p {
+    max-width: 100%;
+  }
+}
+
