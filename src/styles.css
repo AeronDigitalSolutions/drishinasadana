@@ -870,7 +870,7 @@ p {
   align-items: center;
   justify-content: center;
   width: max-content;
-  margin-inline: auto;
+  margin-left: 0;
 }
 
 .consult-cta:hover {
@@ -1308,6 +1308,10 @@ p {
   top: -1px;
   color: #bf8d4d;
   font-weight: 700;
+}
+
+.live-copy .cta-row {
+  justify-content: flex-start;
 }
 
 .live-media {
