@@ -1,140 +1,103 @@
-/* ==========================================================
-   WORKSHOPS PAGE
-   ========================================================== */
 .page-workshops {
-  background-color: transparent;
+  background: transparent;
   min-height: 100vh;
 }
 
-/* Workshops Hero */
+.work-hero-section,
+.work-steps-section,
+.work-list-section,
+.work-bundle-section {
+  padding: 56px 0;
+}
+
 .work-hero-section {
-  background-color: #fdfaf6;
-  padding: 80px 0 60px;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
+  background:
+    radial-gradient(circle at 100% 10%, rgba(234, 176, 106, 0.08), transparent 36%),
+    linear-gradient(180deg, rgba(248, 244, 238, 0.58) 0%, rgba(246, 241, 234, 0.78) 100%);
 }
 
-/* Subtle curved background matching the screenshot */
-.work-hero-section::after {
-  content: "";
-  position: absolute;
-  top: -50%;
-  right: -20%;
-  width: 60%;
-  height: 200%;
-  background: radial-gradient(circle at center, rgba(246, 170, 64, 0.05) 0%, transparent 60%);
-  border-radius: 50%;
-  pointer-events: none;
-}
-
-.work-hero-shell {
-  max-width: 900px;
+.work-hero-shell,
+.work-steps-shell,
+.work-list-shell,
+.work-bundle-shell {
+  max-width: 1240px;
   margin: 0 auto;
-  position: relative;
-  z-index: 1;
+}
+
+.work-hero-title,
+.work-steps-title {
+  font-family: 'Playfair Display', serif;
+  color: #2b578f;
 }
 
 .work-hero-title {
-  color: var(--text);
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(2rem, 5vw, 2.8rem);
-  font-weight: 700;
-  margin-bottom: 24px;
+  font-size: clamp(2.2rem, 4vw, 3.4rem);
+  margin-bottom: 16px;
+  text-align: center;
 }
 
 .work-hero-subtitle {
   color: var(--muted);
-  font-family: 'Inter', sans-serif;
-  font-size: 1.1rem;
-  line-height: 1.6;
-  max-width: 800px;
+  font-size: 1.08rem;
+  line-height: 1.7;
+  max-width: 980px;
   margin: 0 auto;
-}
-
-/* Workshops Steps */
-.work-steps-section {
-  padding: 60px 0;
-  background-color: transparent;
   text-align: center;
 }
 
-.work-steps-shell {
-  max-width: 1000px;
-  margin: 0 auto;
-}
-
 .work-steps-title {
-  color: #1a4f8b;
-  /* Blue color from screenshot */
-  font-family: 'Inter', sans-serif;
-  font-size: clamp(1.4rem, 3vw, 1.8rem);
-  font-weight: 600;
-  margin-bottom: 40px;
+  text-align: center;
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  margin-bottom: 26px;
 }
 
 .work-steps-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
 }
 
 .work-step-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--surface);
+  box-shadow: 0 10px 18px rgba(90, 63, 38, 0.06);
+  padding: 16px;
+  text-align: center;
 }
 
 .work-step-label {
-  color: #1a4f8b;
+  color: #9e754f;
   font-weight: 700;
-  font-size: 1.1rem;
-  margin-bottom: 12px;
+  margin-bottom: 8px;
 }
 
 .work-step-action {
-  background: #fdfdfd;
-  border: 1px solid #1a4f8b;
-  border-radius: 30px;
-  padding: 14px 24px;
+  color: #3f352f;
   font-weight: 600;
-  color: #111;
-  width: 100%;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
-}
-
-@media (max-width: 768px) {
-  .work-steps-grid {
-    grid-template-columns: 1fr;
-    gap: 30px;
-  }
-}
-
-/* Workshop List */
-.work-list-section {
-  padding: 40px 0 80px;
-  background-color: transparent;
 }
 
 .work-list-shell {
-  max-width: 1100px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: 60px;
+  display: grid;
+  gap: 26px;
 }
 
 .work-item {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: 0 12px 28px rgba(90, 63, 38, 0.08);
   display: grid;
-  grid-template-columns: 350px 1fr auto;
-  gap: 40px;
+  grid-template-columns: 320px 1fr auto;
+  gap: 22px;
+  padding: 18px;
   align-items: center;
 }
 
 .work-item-image-col {
-  border-radius: 20px;
+  border-radius: 14px;
   overflow: hidden;
-  height: 350px;
+  height: 260px;
 }
 
 .work-item-img {
@@ -143,208 +106,126 @@
   object-fit: cover;
 }
 
-.work-item-content-col {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
 .work-item-title {
-  color: #f17244;
-  /* Orange text */
-  font-family: 'Inter', sans-serif;
-  font-size: 2.2rem;
-  font-weight: 600;
-  margin-bottom: 20px;
+  font-family: 'Playfair Display', serif;
+  color: #2e2928;
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+  margin-bottom: 10px;
 }
 
 .work-item-fee {
-  margin-bottom: 24px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  position: relative;
+  margin-bottom: 14px;
   padding-left: 12px;
+  border-left: 4px solid #e6b27f;
 }
 
-/* Vertical pink bar indicator next to fee */
-.work-item-fee::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 4px;
-  height: 20px;
-  background-color: #ea3f60;
-  border-radius: 2px;
-}
-
-.work-fee-text {
-  color: #f17244;
-  font-weight: 700;
-  font-size: 1.1rem;
-}
-
+.work-fee-text,
 .work-fee-buy {
-  color: #f17244;
+  color: #d67e25;
   font-weight: 700;
-  font-size: 1.1rem;
-  border-bottom: 2px solid #f17244;
-  cursor: pointer;
 }
 
 .work-item-learn-heading {
-  color: #444;
-  font-weight: 500;
-  margin-bottom: 12px;
+  color: #5f554f;
+  margin-bottom: 8px;
 }
 
 .work-item-points {
   list-style: none;
   padding: 0;
   margin: 0;
+  display: grid;
+  gap: 7px;
 }
 
 .work-item-points li {
+  color: #4d433f;
+  line-height: 1.45;
+  padding-left: 18px;
   position: relative;
-  padding-left: 20px;
-  margin-bottom: 10px;
-  color: #444;
-  line-height: 1.4;
 }
 
 .work-item-points li::before {
-  content: "•";
+  content: '•';
   position: absolute;
   left: 0;
-  color: #888;
+  color: #c08b51;
+}
+
+.work-item-number-col .btn {
+  white-space: nowrap;
+}
+
+.work-item-cta-col {
+  flex-direction: column;
+  gap: 10px;
+}
+
+.work-bundle-section {
+  background:
+    radial-gradient(circle at 4% 75%, rgba(225, 190, 147, 0.14), transparent 36%),
+    linear-gradient(180deg, #fbf7f2 0%, #f7f3ee 100%);
+  border-top: 1px solid #efe4d8;
+}
+
+.work-bundle-layout-card {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: 0 12px 28px rgba(90, 63, 38, 0.08);
+  display: grid;
+  grid-template-columns: 42% 58%;
+  gap: 24px;
+  padding: 22px;
+}
+
+.work-bundle-layout-image img {
+  width: 100%;
+  height: 100%;
+  min-height: 260px;
+  object-fit: cover;
+  border-radius: 14px;
+}
+
+.work-bundle-layout-content h2 {
+  font-family: 'Playfair Display', serif;
+  color: #2b578f;
+  font-size: clamp(1.9rem, 3vw, 2.8rem);
+  margin-bottom: 10px;
+}
+
+.work-bundle-layout-content p {
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.work-bundle-layout-cta {
+  margin-top: 16px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.work-bundle-layout-cta .price {
+  color: #6a4b30;
+  font-weight: 700;
   font-size: 1.2rem;
-}
-
-.work-item-number-col {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.work-number-circle {
-  width: 60px;
-  height: 60px;
-  border: 2px solid #1a1e43;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: #111;
-}
-
-/* Pattern: alternating dark blue and outline circles */
-.work-item:nth-child(even) .work-number-circle {
-  background-color: #0b102f;
-  border-color: #0b102f;
-  color: #fff;
 }
 
 @media (max-width: 992px) {
+  .work-steps-grid {
+    grid-template-columns: 1fr;
+  }
+
   .work-item {
     grid-template-columns: 1fr;
-    gap: 30px;
   }
 
   .work-item-image-col {
-    height: auto;
-    max-height: 400px;
+    height: 300px;
   }
 
-  .work-item-number-col {
-    justify-content: flex-start;
+  .work-bundle-layout-card {
+    grid-template-columns: 1fr;
   }
 }
-
-/* Workshop Bundle Banner */
-.work-bundle-section {
-  padding: 40px 0 80px;
-  background-color: #fcfcfc;
-}
-
-.work-bundle-shell {
-  max-width: 1000px;
-  margin: 0 auto;
-}
-
-.work-bundle-content {
-  background: #f7f6f5;
-  border: 1px solid #e8e8e8;
-  border-radius: 0;
-  /* Boxy edge matching screenshot */
-  padding: 50px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 40px;
-}
-
-.work-bundle-text h2 {
-  color: #0d204a;
-  /* Deep navy blue */
-  font-family: 'Inter', sans-serif;
-  font-size: clamp(2.2rem, 4vw, 3.2rem);
-  font-weight: 700;
-  margin-bottom: 16px;
-  line-height: 1.1;
-}
-
-.work-bundle-text p {
-  color: #222;
-  font-size: 1.2rem;
-  line-height: 1.5;
-  max-width: 400px;
-}
-
-.work-bundle-cta-wrap {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
-}
-
-.work-bundle-price-badge {
-  background: #ff5f1f;
-  /* Vibrant orange */
-  color: #fff;
-  padding: 24px 40px;
-  border-radius: 50px;
-  font-size: 1.8rem;
-  font-weight: 700;
-  text-align: center;
-  box-shadow: 0 4px 15px rgba(255, 95, 31, 0.3);
-}
-
-.work-bundle-btn {
-  background: transparent;
-  color: #0d204a;
-  border: none;
-  font-size: 1.4rem;
-  font-weight: 500;
-  cursor: pointer;
-}
-
-.work-bundle-btn:hover {
-  text-decoration: underline;
-}
-
-@media (max-width: 768px) {
-  .work-bundle-content {
-    flex-direction: column;
-    text-align: center;
-    padding: 40px 20px;
-  }
-
-  .work-bundle-text p {
-    max-width: 100%;
-  }
-}
-

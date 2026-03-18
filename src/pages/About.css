@@ -1,274 +1,209 @@
-/* ==========================================================
-   ABOUT PAGE
-   ========================================================== */
 .page-about {
-  background-color: transparent;
+  background: transparent;
   min-height: 100vh;
 }
 
-/* About Hero */
+.about-hero-section,
+.about-traits-section,
+.about-bio-section,
+.about-featured-override,
+.about-news-section {
+  padding: 56px 0;
+}
+
 .about-hero-section {
-  padding: 80px 0 60px;
-  background-color: #fdfaf6;
-  position: relative;
-  overflow: hidden;
+  background:
+    radial-gradient(circle at 100% 10%, rgba(234, 176, 106, 0.08), transparent 35%),
+    linear-gradient(180deg, rgba(248, 244, 238, 0.58) 0%, rgba(246, 241, 234, 0.78) 100%);
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
 }
 
-/* Very subtle background pattern */
-.about-hero-section::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  right: -5%;
-  width: 50%;
-  height: 100%;
-  background: radial-gradient(circle at center, rgba(235, 185, 140, 0.08) 0%, transparent 60%);
-  pointer-events: none;
-}
-
-.about-hero-shell {
-  max-width: 1200px;
+.about-hero-shell,
+.about-bio-grid,
+.about-traits-shell,
+.about-news-shell {
+  max-width: 1240px;
   margin: 0 auto;
 }
 
-.about-hero-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 60px;
-  align-items: center;
-}
-
-.about-hero-image-col {
-  position: relative;
-  border-radius: 20px;
-  overflow: hidden;
-}
-
-/* The light pink background shape offset behind the image */
-.about-hero-image-shape {
-  position: absolute;
-  top: -20px;
-  left: -20px;
-  width: 100%;
-  height: 100%;
-  background-color: #f9d1d1;
-  /* Light pastel pink */
-  border-radius: 20px;
-  z-index: 0;
-}
-
-.about-hero-img {
-  position: relative;
-  z-index: 1;
-  width: 100%;
-  border-radius: 20px;
-  display: block;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-}
-
-.about-hero-content-col {
-  display: flex;
-  flex-direction: column;
-}
-
-.about-hero-title.title-v1 {
-  font-family: 'Playfair Display', serif;
-  color: #1e3a8a;
-  /* Deep blue */
-  font-size: clamp(2.5rem, 4vw, 3.5rem);
-  font-weight: 700;
-  line-height: 1.1;
-  margin-bottom: 20px;
-  display: none;
-  /* Hide one depending on breakpoint if needed, or just show text */
-}
-
-.about-hero-title.title-v2 {
-  font-family: 'Inter', sans-serif;
-  color: #1e3a8a;
-  font-size: clamp(1.8rem, 3vw, 2.6rem);
-  font-weight: 700;
-  line-height: 1.2;
-  margin-bottom: 30px;
-}
-
-.about-hero-bio {
-  color: var(--muted);
-  font-family: 'Inter', sans-serif;
-  font-size: 1.1rem;
-  line-height: 1.7;
-}
-
-.about-hero-bio p {
-  margin-bottom: 20px;
-}
-
-.about-hero-bio b {
-  font-weight: 700;
-  color: #111;
-}
-
+.about-hero-grid,
 .about-bio-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 60px;
+  gap: 34px;
   align-items: center;
 }
 
-@media (max-width: 992px) {
-  .about-hero-grid {
-    grid-template-columns: 1fr;
-    gap: 40px;
-  }
-
-  .about-bio-grid {
-    display: flex !important;
-    flex-direction: column-reverse !important;
-    gap: 40px;
-  }
-
-  .about-hero-image-col {
-    max-width: 500px;
-    margin: 0 auto;
-  }
+.about-hero-image-col,
+.about-bio-media-col {
+  position: relative;
 }
 
-/* About Traits (Tags & Logo) */
-.about-traits-section {
-  padding: 60px 0;
-  background-color: transparent;
+.about-hero-image-shape,
+.about-bio-shape {
+  position: absolute;
+  inset: auto;
+  width: 72%;
+  height: 72%;
+  background: #f2ddcb;
+  border-radius: var(--radius);
+  z-index: 0;
 }
 
-.about-traits-shell {
-  max-width: 1200px;
-  margin: 0 auto;
+.about-hero-image-shape {
+  top: -18px;
+  left: -18px;
+}
+
+.about-bio-shape {
+  bottom: 26px;
+  left: 0;
+}
+
+.about-hero-img,
+.about-bio-image-main,
+.about-bio-image-overlap {
+  position: relative;
+  z-index: 1;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  box-shadow: 0 12px 28px rgba(90, 63, 38, 0.1);
+}
+
+.about-hero-img {
+  width: 100%;
+  display: block;
+}
+
+.about-hero-title.title-v1,
+.about-bio-title.title-v2 {
+  font-family: 'Playfair Display', serif;
+  color: #2b578f;
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  line-height: 1.08;
+  margin-bottom: 16px;
+  display: block;
+}
+
+.about-bio-title-mobile {
+  display: none;
+}
+
+.about-hero-title-mobile {
+  display: none;
+}
+
+.about-hero-bio p,
+.about-bio-content p {
+  color: var(--muted);
+  font-size: 1.06rem;
+  line-height: 1.7;
+}
+
+.about-bio-content {
+  display: grid;
+  gap: 10px;
+}
+
+.about-bio-media-col {
+  min-height: 560px;
+}
+
+.about-bio-image-main {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 74%;
+  height: 76%;
+  overflow: hidden;
+}
+
+.about-bio-image-overlap {
+  position: absolute;
+  left: 8%;
+  bottom: 0;
+  width: 60%;
+  height: 56%;
+  overflow: hidden;
+  border-width: 3px;
+  border-color: #fff;
+}
+
+.about-bio-image-main img,
+.about-bio-image-overlap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .about-traits-container {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: 0 12px 28px rgba(90, 63, 38, 0.08);
+  padding: 26px;
   display: flex;
   align-items: center;
-  gap: 40px;
+  gap: 18px;
 }
 
 .about-traits-logo {
+  width: 130px;
   flex-shrink: 0;
-  width: 150px;
 }
 
 .about-traits-logo img {
   width: 100%;
-  height: auto;
+  display: block;
 }
 
 .about-traits-grid {
   display: flex;
   flex-wrap: wrap;
-  gap: 16px;
-  flex: 1;
-  justify-content: center;
+  gap: 10px;
 }
 
 .about-trait-pill {
-  padding: 16px 32px;
-  border-radius: 40px;
-  font-family: 'Inter', sans-serif;
+  border: 1px solid #e6d8c7;
+  border-radius: 999px;
+  padding: 10px 16px;
   font-weight: 600;
-  font-size: 1.2rem;
-  color: #111;
-  text-align: center;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
+  color: #3c332e;
+  box-shadow: 0 8px 14px rgba(90, 63, 38, 0.05);
 }
 
-@media (max-width: 992px) {
-  .about-traits-container {
-    flex-direction: column;
-  }
-}
-
-/* About Section Shared Headings */
 .about-section-heading {
-  font-family: 'Inter', sans-serif;
-  color: #ff6a3c;
-  /* Bright orange */
-  font-size: clamp(2rem, 4vw, 2.8rem);
-  font-weight: 600;
-  text-align: center;
-  margin-bottom: 40px;
-  position: relative;
-  display: inline-block;
-  left: 50%;
-  transform: translateX(-50%);
+  font-family: 'Playfair Display', serif;
+  color: #2b578f;
+  font-size: clamp(2rem, 4vw, 3rem);
+  margin: 0 0 20px;
 }
 
 .heading-underline {
-  position: absolute;
-  bottom: -10px;
-  left: 10%;
-  width: 80%;
-  height: 3px;
-  background-color: #0d204a;
-  /* Navy blue underline */
+  height: 2px;
+  width: 120px;
+  margin: 8px auto 0;
+  background: #dec2a2;
 }
 
-/* About Featured */
-.about-featured-section {
-  padding: 60px 0;
-  background-color: transparent;
-}
-
-.about-featured-shell {
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.about-logos-row {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  gap: 40px;
-}
-
-.about-logo-item {
-  height: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 10px;
-  border: 1px solid #f0f0f0;
-  border-radius: 8px;
-  background: #fff;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
-}
-
-.about-logo-item img {
-  max-height: 100%;
-  max-width: 150px;
-  object-fit: contain;
-}
-
-/* About Newspapers */
 .about-news-section {
-  padding: 60px 0 100px;
-  background-color: #fcfcfc;
-}
-
-.about-news-shell {
-  max-width: 1200px;
-  margin: 0 auto;
+  background:
+    radial-gradient(circle at 4% 75%, rgba(225, 190, 147, 0.14), transparent 36%),
+    linear-gradient(180deg, #fbf7f2 0%, #f7f3ee 100%);
+  border-top: 1px solid #efe4d8;
 }
 
 .about-news-masonry {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 24px;
-  margin-top: 50px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
 }
 
 .about-news-item {
-  border-radius: 12px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
   overflow: hidden;
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 10px 22px rgba(90, 63, 38, 0.08);
   background: #fff;
 }
 
@@ -277,14 +212,169 @@
   display: block;
 }
 
-@media (max-width: 768px) {
-  .about-news-masonry {
+.about-news-mobile {
+  display: none;
+}
+
+.about-news-mobile-slider {
+  overflow: hidden;
+}
+
+.about-news-mobile-track {
+  display: flex;
+  transition: transform 320ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+
+.about-news-mobile-slide {
+  min-width: 100%;
+}
+
+.about-news-mobile-dots {
+  margin-top: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.about-news-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  border: 0;
+  background: #d7ccc0;
+  cursor: pointer;
+  padding: 0;
+  transition: all 180ms ease;
+}
+
+.about-news-dot.active {
+  width: 20px;
+  background: #d67e25;
+}
+
+@media (max-width: 992px) {
+
+  .about-hero-grid,
+  .about-bio-grid {
     grid-template-columns: 1fr;
+  }
+
+  .about-bio-media-col {
+    min-height: 460px;
+  }
+
+  .about-traits-container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .about-news-masonry {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
-.about-featured-override {
-  padding: 60px 0;
-  background-color: transparent;
-}
+@media (max-width: 768px) {
+  .about-hero-title-mobile {
+    display: block;
+    grid-column: 1 / -1;
+    margin-bottom: 6px;
+  }
 
+  .about-hero-content-col .about-hero-title {
+    display: none;
+  }
+
+  .about-hero-image-col {
+    order: 2;
+  }
+
+  .about-hero-content-col {
+    order: 3;
+  }
+
+  .about-bio-title-mobile {
+    display: block;
+    grid-column: 1 / -1;
+    margin-bottom: 6px;
+  }
+
+  .about-bio-content-col .about-bio-title {
+    display: none;
+  }
+
+  .about-bio-media-col {
+    order: 2;
+  }
+
+  .about-bio-content-col {
+    order: 3;
+  }
+
+  .about-traits-section {
+    padding-top: 40px;
+    padding-bottom: 28px;
+  }
+
+  .about-traits-container {
+    padding: 28px 18px 30px;
+    border-radius: 28px;
+    align-items: center;
+    gap: 22px;
+  }
+
+  .about-traits-logo {
+    width: 210px;
+    margin: 0 auto;
+  }
+
+  .about-traits-grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .about-trait-pill {
+    background: #ffffff !important;
+    border: 1px solid #e2ddd8;
+    border-radius: 24px;
+    box-shadow: 0 8px 14px rgba(90, 63, 38, 0.06);
+    padding: 14px 10px;
+    text-align: center;
+    font-size: 0.95rem;
+    line-height: 1.3;
+    min-height: 78px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .about-trait-pill-highlight {
+    grid-column: 1 / -1;
+    justify-self: center;
+    width: min(82%, 320px);
+    min-height: 72px;
+    background: #fbf0e3 !important;
+    color: #b76a26;
+    font-weight: 700;
+  }
+
+  .about-news-masonry {
+    display: none;
+  }
+
+  .about-news-mobile {
+    display: block;
+  }
+
+  .about-news-mobile .about-news-item {
+    margin: 0 auto;
+    width: min(100%, 460px);
+  }
+
+  .about-bio-media-col {
+    min-height: 400px;
+  }
+}

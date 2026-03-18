@@ -1,5 +1,5 @@
 import './Home.css';
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { FaWhatsapp, FaAmazon } from 'react-icons/fa'
 import SectionTitle from '../components/SectionTitle'
 import ReadMore from '../components/ReadMore'
@@ -14,6 +14,12 @@ import {
 } from '../data/siteContent'
 
 const Home = () => {
+    // Basic refs
+    const heroContentRef = useRef(null)
+
+    // Modals
+    const [showBookModal, setShowBookModal] = useState(false);
+    const [showComingSoonModal, setShowComingSoonModal] = useState(false);
     const [activeTestimonial, setActiveTestimonial] = useState(0)
     const [activeLiveSlide, setActiveLiveSlide] = useState(0)
     const [liveTouchStartX, setLiveTouchStartX] = useState(null)
@@ -40,7 +46,7 @@ const Home = () => {
         },
         {
             src: '/site-assets/images/booklivesession-2.png',
-            alt: 'Dr. Ishina speaking on stage',
+            alt: 'Dr. Ishinna speaking on stage',
         },
     ]
 
@@ -80,7 +86,7 @@ const Home = () => {
                             <span>Empowered Parents.</span>
                         </h1>
                         <div className="line" />
-                        <h3>Meet Dr. Ishina B. Sadana</h3>
+                        <h3>Meet Dr. Ishinna B. Sadana</h3>
                         <p>
                             Parenting Coach • TEDx Speaker • Bestselling Author
                             <br />
@@ -113,7 +119,7 @@ const Home = () => {
                         <div className="hero-glow" />
                         <img
                             src="/site-assets/images/hero-dr-ishinna.png?v=2"
-                            alt="Dr. Ishina"
+                            alt="Dr. Ishinna"
                             className="hero-image"
                         />
                     </div>
@@ -139,14 +145,14 @@ const Home = () => {
                     <div className="hero-mobile-media reveal">
                         <img
                             src="/site-assets/images/hero-dr-ishinna.png?v=2"
-                            alt="Dr. Ishina"
+                            alt="Dr. Ishinna"
                             className="hero-mobile-image"
                         />
                     </div>
 
                     <div className="hero-mobile-copy reveal">
                         <div className="line" />
-                        <h3>Meet Dr. Ishina B. Sadana</h3>
+                        <h3>Meet Dr. Ishinna B. Sadana</h3>
                         <p>
                             Parenting Coach • TEDx Speaker • Bestselling Author.
                             <br />
@@ -291,7 +297,7 @@ const Home = () => {
                             <br />
                             Consultation <span>with</span>
                             <br />
-                            <span>Dr. Ishina Sadana</span>
+                            <span>Dr. Ishinna Sadana</span>
                         </h2>
                         <p className="consult-intro">
                             Get personalized, practical parenting guidance rooted in psychology and real-world
@@ -322,7 +328,7 @@ const Home = () => {
                     </article>
 
                     <article className="book-copy-panel">
-                        <p className="book-kicker">Book by Dr. Ishina</p>
+                        <p className="book-kicker">Book by Dr. Ishinna</p>
                         <h2>
                             The Book That
                             <br />
@@ -341,7 +347,7 @@ const Home = () => {
                         </ul>
                         <div className="book-cta-row">
 
-                            <button className="btn book-cta amazon-btn">
+                            <button className="btn book-cta amazon-btn" onClick={() => setShowBookModal(true)}>
                                 <span className="journey-step">
                                     <FaAmazon className="btn-icon amazon" />
                                     <span>Buy on Amazon →</span>
@@ -364,7 +370,7 @@ const Home = () => {
                         <p className="live-topline">LIVE WORKSHOPS • SCHOOLS • CORPORATES • PARENT GROUPS</p>
                         <h2>
                             Book a Live Session with
-                            <span className="live-name">Dr. Ishina</span>
+                            <span className="live-name">Dr. Ishinna</span>
                         </h2>
                         <div className="live-title-line" />
                         <div className="live-mobile-carousel" aria-label="Live session photos">
@@ -402,7 +408,7 @@ const Home = () => {
                             </button>
                         </div>
                         <p className="live-intro">
-                            Dr. Ishina conducts impactful live workshops - both online and offline - for
+                            Dr. Ishinna conducts impactful live workshops - both online and offline - for
                             schools, corporates, and parent communities across India.
                         </p>
                         <p className="live-intro">
@@ -442,7 +448,7 @@ const Home = () => {
                         <div className="live-photo-card live-photo-overlay">
                             <img
                                 src="/site-assets/images/booklivesession-2.png"
-                                alt="Dr. Ishina speaking"
+                                alt="Dr. Ishinna speaking"
                             />
                         </div>
                     </div>
@@ -482,11 +488,61 @@ const Home = () => {
                             </button>
                         </form>
                         <article className="contact-premium-image-card">
-                            <img src="/site-assets/images/getintouch.png" alt="Dr. Ishina" />
+                            <img src="/site-assets/images/getintouch.png" alt="Dr. Ishinna" />
                         </article>
                     </div>
                 </div>
             </section>
+
+            {/* Book Purchase Modal */}
+            {showBookModal && (
+                <div className="global-modal-overlay" onClick={() => setShowBookModal(false)}>
+                    <div className="global-modal-content" onClick={e => e.stopPropagation()}>
+                        <h2 className="global-modal-title">Choose Version</h2>
+                        <div className="global-modal-actions">
+                            <a 
+                                href="https://www.amazon.in/Power-Parent-Parents-Know-Better/dp/014346597X" 
+                                target="_blank" 
+                                rel="noreferrer" 
+                                className="global-modal-btn-primary" 
+                                onClick={() => setShowBookModal(false)}
+                            >
+                                Original Version (English)
+                            </a>
+                            <button 
+                                className="global-modal-btn-secondary" 
+                                onClick={() => {
+                                    setShowBookModal(false);
+                                    setShowComingSoonModal(true);
+                                }}
+                            >
+                                Marathi Version
+                            </button>
+                            <button 
+                                className="global-modal-btn-text" 
+                                onClick={() => setShowBookModal(false)}
+                            >
+                                Cancel
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {/* Coming Soon Modal */}
+            {showComingSoonModal && (
+                <div className="global-modal-overlay" onClick={() => setShowComingSoonModal(false)}>
+                    <div className="global-modal-content" onClick={e => e.stopPropagation()}>
+                        <h2 className="global-modal-title">Coming Soon!</h2>
+                        <p className="global-modal-text">The Marathi translation for <strong>Power to the Parent</strong> is currently underway and will be available to purchase very soon.</p>
+                        <div className="global-modal-actions">
+                            <button className="global-modal-btn-primary" onClick={() => setShowComingSoonModal(false)}>
+                                Close
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </main>
     )
 }

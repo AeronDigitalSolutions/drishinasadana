@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { workshopsData } from '../data/workshopsContent';
 
 const WorkshopBundleBanner = () => {
@@ -22,9 +23,9 @@ const WorkshopBundleBanner = () => {
                         <p>{bundle.subtitle}</p>
 
                         <div className="work-bundle-layout-cta">
-                            <button className="btn primary">
+                            <Link to="/checkout/bundle" className="btn primary" style={{ textDecoration: 'none', display: 'inline-block', textAlign: 'center' }}>
                                 {bundle.buttonText}
-                            </button>
+                            </Link>
                             <span className="price">{bundle.price}</span>
                         </div>
                     </div>

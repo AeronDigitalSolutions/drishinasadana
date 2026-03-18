@@ -5,6 +5,11 @@ const AboutBio = () => {
     return (
         <section className="about-bio-section">
             <div className="shell about-bio-grid">
+                <h2
+                    className="about-bio-title-mobile title-v2"
+                    dangerouslySetInnerHTML={{ __html: aboutData.hero.title2 }}
+                ></h2>
+
                 <div className="about-bio-content-col">
                     <h2
                         className="about-bio-title title-v2"

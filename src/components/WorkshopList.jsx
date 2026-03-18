@@ -1,7 +1,30 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { workshopsData } from '../data/workshopsContent';
+import { getCurrentAuthState, getProfileInfo } from '../lib/apiLms';
 
 const WorkshopList = () => {
+    const [authState, setAuthState] = useState(getCurrentAuthState())
+    const [purchasedWorkshopIds, setPurchasedWorkshopIds] = useState(new Set())
+
+    useEffect(() => {
+        if (authState) {
+            getProfileInfo().then(data => {
+                if (data && data.purchases) {
+                    setPurchasedWorkshopIds(new Set(data.purchases.map(p => p.workshopId)))
+                }
+            })
+        } else {
+            setPurchasedWorkshopIds(new Set())
+        }
+    }, [authState])
+
+    useEffect(() => {
+        const syncAuth = () => setAuthState(getCurrentAuthState())
+        window.addEventListener('Ishinna-auth-changed', syncAuth)
+        return () => window.removeEventListener('Ishinna-auth-changed', syncAuth)
+    }, [])
+
     return (
         <section className="work-list-section">
             <div className="shell work-list-shell">
@@ -35,10 +58,41 @@ const WorkshopList = () => {
                             </div>
                         </div>
 
-                        <div className="work-item-number-col" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                            <button className="btn primary" style={{ whiteSpace: 'nowrap', padding: '12px 30px' }}>
-                                Buy this workshop
-                            </button>
+                        <div className="work-item-number-col work-item-cta-col" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                            {!authState ? (
+                                <>
+                                    <Link
+                                        to={`/checkout/${workshop.id}`}
+                                        className="btn primary"
+                                        style={{ whiteSpace: 'nowrap', padding: '12px 30px', textDecoration: 'none' }}
+                                    >
+                                        Buy this workshop
+                                    </Link>
+                                    <Link
+                                        to={`/workshop-login/${workshop.id}`}
+                                        className="btn ghost"
+                                        style={{ whiteSpace: 'nowrap', padding: '12px 24px', textDecoration: 'none' }}
+                                    >
+                                        Already Purchased? Get Access
+                                    </Link>
+                                </>
+                            ) : purchasedWorkshopIds.has(workshop.id) ? (
+                                <Link
+                                    to={`/lms/workshop/${workshop.id}/${authState.authToken}`}
+                                    className="btn primary"
+                                    style={{ whiteSpace: 'nowrap', padding: '12px 30px', textDecoration: 'none' }}
+                                >
+                                    View Workshop
+                                </Link>
+                            ) : (
+                                <Link
+                                    to={`/checkout/${workshop.id}`}
+                                    className="btn primary"
+                                    style={{ whiteSpace: 'nowrap', padding: '12px 30px', textDecoration: 'none' }}
+                                >
+                                    Buy this workshop
+                                </Link>
+                            )}
                         </div>
                     </div>
                 ))}

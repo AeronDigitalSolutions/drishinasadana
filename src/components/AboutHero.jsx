@@ -6,6 +6,11 @@ const AboutHero = () => {
         <section className="about-hero-section">
             <div className="shell about-hero-shell">
                 <div className="about-hero-grid">
+                    <h1
+                        className="about-hero-title-mobile title-v1"
+                        dangerouslySetInnerHTML={{ __html: aboutData.hero.title }}
+                    ></h1>
+
                     <div className="about-hero-image-col">
                         <div className="about-hero-image-shape"></div>
                         <img

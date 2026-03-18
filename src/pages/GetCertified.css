@@ -1,1137 +1,436 @@
-/* ==========================================================
-   GET CERTIFIED PAGE - Section 1: Hero & Testimonials
-   ========================================================== */
 .page-get-certified {
-  background-color: transparent;
+  background: transparent;
   min-height: 100vh;
-  position: relative;
-  overflow: hidden;
+}
+
+.cert-testimonials-section,
+.cert-about-section,
+.cert-whatget-section,
+.cert-enroll-section,
+.cert-coaches-section,
+.cert-feedback-section,
+.cert-finalfaq-section {
+  padding: 56px 0;
 }
 
 .cert-testimonials-section {
-  position: relative;
-  padding-top: 80px;
-  padding-bottom: 80px;
+  background:
+    radial-gradient(circle at 100% 10%, rgba(234, 176, 106, 0.08), transparent 36%),
+    linear-gradient(180deg, rgba(248, 244, 238, 0.58) 0%, rgba(246, 241, 234, 0.78) 100%);
 }
 
-.cert-bg-curve {
-  position: absolute;
-  top: 0;
-  right: -5%;
-  width: 60%;
-  height: 100%;
-  background: radial-gradient(circle at top right, rgba(235, 185, 140, 0.1) 0%, transparent 60%);
-  border-bottom-left-radius: 50%;
-  pointer-events: none;
-  z-index: 0;
+.cert-header-shell,
+.cert-about-shell,
+.cert-whatget-shell,
+.cert-enroll-shell,
+.cert-download-shell,
+.cert-feedback-shell,
+.cert-finalfaq-shell {
+  max-width: 1240px;
+  margin: 0 auto;
 }
 
-.cert-header-shell {
-  position: relative;
-  z-index: 1;
-  max-width: 1100px;
-  margin-bottom: 60px;
+.cert-title,
+.cert-section-title,
+.cert-whatget-title,
+.cert-coaches-title,
+.cert-feedback-title,
+.cert-finalfaq-title {
+  font-family: 'Playfair Display', serif;
+  color: #2b578f;
+  text-align: center;
 }
 
 .cert-title {
-  font-family: 'Playfair Display', serif;
-  color: var(--text);
-  font-size: clamp(2.4rem, 4vw, 3.4rem);
-  font-weight: 700;
-  margin-bottom: 24px;
-  letter-spacing: -0.01em;
+  font-size: clamp(2.1rem, 4vw, 3.4rem);
+  margin-bottom: 14px;
 }
 
-.cert-subtitle {
+.cert-subtitle,
+.cert-section-desc {
   color: var(--muted);
-  font-size: clamp(1.1rem, 2vw, 1.35rem);
-  line-height: 1.6;
-  max-width: 1000px;
-  font-weight: 500;
-}
-
-.cert-carousel-shell {
-  position: relative;
-  z-index: 2;
-  width: 100%;
-  max-width: 1340px;
+  font-size: 1.06rem;
+  line-height: 1.7;
+  max-width: 980px;
   margin: 0 auto;
-  padding-inline: 40px;
+  text-align: center;
 }
 
 .cert-carousel-container {
   position: relative;
-  background: transparent;
-  padding: 40px 20px;
+  margin-top: 26px;
 }
 
 .cert-carousel-viewport {
   overflow: hidden;
-  width: 100%;
-  padding-top: 50px;
+  padding: 20px 44px;
 }
 
 .cert-carousel-track {
   display: flex;
-  transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
-  will-change: transform;
+  transition: transform 0.45s ease;
 }
 
 .cert-card-wrap {
+  padding: 0 10px;
   flex-shrink: 0;
-  padding: 0 15px;
 }
 
 .cert-card {
   position: relative;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  background: var(--surface);
   border: 1px solid var(--line);
   border-radius: var(--radius);
+  background: var(--surface);
   box-shadow: 0 12px 28px rgba(90, 63, 38, 0.08);
-  transition: transform 220ms ease, box-shadow 220ms ease, border-color 200ms ease;
-}
-
-.cert-card:hover {
-  transform: translateY(-3px);
-  border-color: #decab5;
-  box-shadow: 0 18px 32px rgba(90, 63, 38, 0.13);
+  overflow: hidden;
+  min-height: 420px;
 }
 
 .cert-card-header {
   background: linear-gradient(135deg, var(--btn-grad-start), var(--btn-grad-end));
-  color: #fff;
-  padding: 24px 70px 24px 24px;
-  border-top-left-radius: 12px;
-  min-height: 120px;
-  position: relative;
+  padding: 16px 90px 16px 16px;
+}
+
+.cert-card-header h3,
+.cert-card-header p {
+  color: #fff !important;
 }
 
 .cert-card-header h3 {
   font-family: 'Inter', sans-serif;
-  font-size: 1.45rem;
-  font-weight: 700;
-  color: #ffffff;
-  margin-bottom: 6px;
-  line-height: 1.1;
-}
-
-.cert-card-header p {
-  color: rgba(255, 255, 255, 0.95);
-  font-size: 0.85rem;
-  font-weight: 500;
-  font-style: italic;
-  line-height: 1.25;
+  font-size: 1.8rem;
+  line-height: 1;
 }
 
 .cert-card-avatar-wrap {
   position: absolute;
-  top: -30px;
-  right: -15px;
-  width: 100px;
-  height: 100px;
+  right: 14px;
+  top: 14px;
+  width: 86px;
+  height: 86px;
   border-radius: 50%;
-  padding: 4px;
-  background: #fff;
-  z-index: 2;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+  border: 3px solid #fff;
+  box-shadow: 0 10px 16px rgba(90, 63, 38, 0.2);
 }
 
 .cert-card-avatar {
   width: 100%;
   height: 100%;
-  border-radius: 50%;
   object-fit: cover;
 }
 
 .cert-card-body {
-  padding: 24px;
-  flex-grow: 1;
+  padding: 16px;
 }
 
 .cert-card-body p {
-  color: #444;
-  font-size: 0.92rem;
-  line-height: 1.6;
-  font-weight: 500;
-  white-space: pre-line;
+  color: #4f4540;
+  line-height: 1.5;
 }
 
 .cert-nav-btn {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  width: 44px;
-  height: 44px;
-  background: var(--surface);
-  border: 1px solid var(--line);
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
-  color: var(--accent);
-  font-size: 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  border: 1px solid #dfcdb9;
+  background: #fff;
+  color: #8c6a4a;
   cursor: pointer;
-  z-index: 10;
-  transition: all 0.2s ease;
-  line-height: 1;
-  padding-bottom: 4px;
-}
-
-.cert-nav-btn:hover {
-  background: var(--surface);
-  color: var(--accent-dark);
-  border-color: #d4b897;
-  box-shadow: 0 4px 12px rgba(90, 63, 38, 0.1);
 }
 
 .cert-nav-btn.prev {
-  left: 10px;
+  left: 0;
 }
 
 .cert-nav-btn.next {
-  right: 10px;
+  right: 0;
 }
 
-@media (max-width: 992px) {
-  .cert-testimonials-section {
-    padding-top: 40px;
-  }
-}
-
-@media (max-width: 768px) {
-  .cert-carousel-shell {
-    padding-inline: 16px;
-  }
-
-  .cert-carousel-container {
-    padding: 24px 10px;
-  }
-
-  .cert-nav-btn {
-    width: 36px;
-    height: 36px;
-    font-size: 1.8rem;
-  }
-
-  .cert-nav-btn.prev {
-    left: 4px;
-  }
-
-  .cert-nav-btn.next {
-    right: 4px;
-  }
-}
-
-/* ==========================================================
-   GET CERTIFIED PAGE - Section 2: About The Program
-   ========================================================== */
-
-.cert-about-section {
-  padding: 50px 0;
-  background-color: transparent;
-}
-
-.cert-about-shell {
-  max-width: 1100px;
-  margin: 0 auto;
-}
-
-.cert-section-title {
-  color: var(--text);
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(2rem, 4vw, 3rem);
-  font-weight: 700;
-  text-align: center;
-  margin-bottom: 24px;
-}
-
-.cert-section-desc {
-  color: #666;
-  font-size: clamp(1.05rem, 2vw, 1.25rem);
-  line-height: 1.6;
-  text-align: center;
-  max-width: 900px;
-  margin: 0 auto 60px;
-}
-
-.cert-faq-container {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  max-width: 1000px;
-  margin: 0 auto;
-}
-
-.cert-faq-item {
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  background: var(--surface);
-  overflow: hidden;
-  transition: all 0.3s ease;
-}
-
-.cert-faq-item.open {
-  border-color: var(--accent);
-  box-shadow: 0 4px 15px rgba(90, 63, 38, 0.08);
-}
-
-.cert-faq-question {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 24px;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  text-align: left;
-  transition: background-color 0.2s;
-}
-
-.cert-faq-question:hover {
-  background-color: #fcf9f5;
-}
-
-.cert-faq-icon {
-  color: var(--accent);
-  font-size: 1.4rem;
-  margin-right: 16px;
-  font-weight: bold;
-}
-
-.cert-faq-text {
-  flex-grow: 1;
-  font-family: 'Inter', sans-serif;
-  font-weight: 700;
-  color: #222;
-  font-size: 1.15rem;
-}
-
-.cert-faq-toggle-icon {
-  color: var(--accent);
-  font-size: 1.6rem;
-  font-weight: 400;
-  width: 24px;
-  text-align: center;
-}
-
-.cert-faq-answer-wrap {
-  transition: height 0.4s ease;
-}
-
-.cert-faq-answer {
-  padding: 0 24px 24px 50px;
-  /* Aligned with text, space for left icon */
-}
-
-.cert-faq-answer p {
-  color: #555;
-  line-height: 1.7;
-  font-size: 1.05rem;
-  margin-bottom: 12px;
-}
-
-.cert-faq-answer p:last-child {
-  margin-bottom: 0;
-}
-
-.cert-about-cta-row {
-  display: flex;
-  gap: 16px;
-  margin-top: 50px;
-  max-width: 1000px;
-  margin-inline: auto;
-}
-
-.cert-btn-primary {
-  background: linear-gradient(135deg, var(--btn-grad-start), var(--btn-grad-end));
-  color: #fff;
-  border: 1px solid transparent;
-  padding: 16px 40px;
-  border-radius: 12px;
-  font-weight: 600;
-  font-size: 1.1rem;
-  font-family: 'Inter', sans-serif;
-  cursor: pointer;
-  transition: transform 180ms ease, box-shadow 220ms ease, filter 180ms ease;
-  min-width: 180px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-}
-
-.cert-btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 14px 24px rgba(0, 0, 0, 0.12);
-  filter: saturate(1.05);
-}
-
-.cert-btn-outline {
-  background-color: transparent;
-  color: #1e1e1e;
-  border: 1px solid #ddd;
-  padding: 16px 40px;
-  border-radius: 12px;
-  font-weight: 600;
-  font-size: 1.1rem;
-  font-family: 'Inter', sans-serif;
-  cursor: pointer;
-  transition: transform 180ms ease, border-color 180ms ease;
-  min-width: 180px;
-}
-
-.cert-btn-outline:hover {
-  background-color: transparent;
-  border-color: #ccc;
-  transform: translateY(-2px);
-}
-
-@media (max-width: 768px) {
-  .cert-about-section {
-    padding: 60px 0;
-  }
-
-  .cert-faq-question {
-    padding: 16px;
-  }
-
-  .cert-faq-text {
-    font-size: 1.05rem;
-  }
-
-  .cert-faq-answer {
-    padding: 0 16px 16px 40px;
-  }
-
-  .cert-about-cta-row {
-    flex-direction: column;
-    align-items: flex-start;
-    padding-inline: 16px;
-  }
-
-  .cert-btn-primary,
-  .cert-btn-outline {
-    width: 100%;
-    margin-bottom: 8px;
-  }
-}
-
-/* ==========================================================
-   GET CERTIFIED PAGE - Section 3: What Do You Get
-   ========================================================== */
-
-.cert-whatget-section {
-  position: relative;
-  padding: 50px 0 70px;
-  background-color: transparent;
-  overflow: hidden;
-}
-
-/* Decorative Background Elements */
-.cert-deco-shape {
-  position: absolute;
-  z-index: 0;
-  pointer-events: none;
-}
-
-.shape-1 {
-  top: 80px;
-  left: 5%;
-  width: 60px;
-  height: 60px;
-  background: #f7cebd;
-  border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
-  transform: rotate(-15deg);
-}
-
-.shape-2 {
-  top: 60px;
-  right: 10%;
-  width: 80px;
-  height: 80px;
-  border: 15px solid #f7cebd;
-  border-bottom-color: transparent;
-  border-left-color: transparent;
-  border-radius: 50%;
-  transform: rotate(45deg);
-}
-
-.shape-3 {
-  top: 350px;
-  left: 6%;
-  width: 50px;
-  height: 50px;
-  background-color: transparent;
-  background-image: radial-gradient(#f7cebd 50%, transparent 50%), radial-gradient(#f7cebd 50%, transparent 50%);
-  background-size: 20px 20px;
-  background-position: 0 0, 10px 10px;
-  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
-}
-
-.shape-4 {
-  bottom: 250px;
-  right: 8%;
-  width: 70px;
-  height: 80px;
-  background-image: radial-gradient(#f8df78 40%, transparent 40%);
-  background-size: 25px 25px;
-  transform: rotate(15deg);
-}
-
-.shape-5 {
-  bottom: 80px;
-  left: 8%;
-  width: 120px;
-  height: 120px;
-  background-image: linear-gradient(0deg, transparent 24%, rgba(246, 170, 64, 0.3) 25%, rgba(246, 170, 64, 0.3) 26%, transparent 27%, transparent 74%, rgba(246, 170, 64, 0.3) 75%, rgba(246, 170, 64, 0.3) 76%, transparent 77%, transparent), linear-gradient(90deg, transparent 24%, rgba(246, 170, 64, 0.3) 25%, rgba(246, 170, 64, 0.3) 26%, transparent 27%, transparent 74%, rgba(246, 170, 64, 0.3) 75%, rgba(246, 170, 64, 0.3) 76%, transparent 77%, transparent);
-  background-size: 30px 30px;
-}
-
-.shape-6 {
-  bottom: 60px;
-  right: 5%;
-  width: 100px;
-  height: 100px;
-  border: 4px solid #f7cebd;
-  border-radius: 40% 60% 60% 40% / 50% 40% 60% 50%;
-  transform: rotate(30deg);
-}
-
-
-/* Layout Content */
-.cert-whatget-shell {
-  position: relative;
-  z-index: 1;
-  max-width: 1100px;
-  margin: 0 auto;
-}
-
-.cert-whatget-title {
-  color: var(--text);
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(2.2rem, 5vw, 3.2rem);
-  font-weight: 700;
-  text-align: center;
-  margin-bottom: 60px;
-}
-
-.cert-whatget-list {
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
-  max-width: 1000px;
-  margin: 0 auto;
-}
-
-.cert-whatget-item {
-  display: flex;
-  align-items: center;
-  position: relative;
-  padding-left: 20px;
-  /* Space for the overlapping label offset */
-}
-
-.cert-whatget-label-wrap {
-  position: absolute;
-  left: 0;
-  z-index: 2;
-  width: 250px;
-  flex-shrink: 0;
-}
-
-.cert-whatget-label {
-  background: var(--surface);
-  border: 2px solid var(--accent);
-  border-radius: 40px;
-  padding: 18px 24px;
-  font-family: 'Inter', sans-serif;
-  font-weight: 700;
-  font-size: 1.15rem;
-  color: #111;
-  text-align: center;
-  box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.05);
-}
-
-.cert-whatget-content-wrap {
-  width: 100%;
-  padding-left: 140px;
-  /* Offset to slide under the overlapping label */
-}
-
-.cert-whatget-content {
-  background: linear-gradient(135deg, rgba(255, 253, 249, 0.8), rgba(247, 238, 225, 0.8));
-  border: 1px solid var(--line);
-  box-shadow: 0 8px 20px rgba(90, 63, 38, 0.05);
-  /* Light lavender purple */
-  border-radius: 40px;
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
-  padding: 24px 40px 24px 130px;
-  /* Extra left padding so text clears the label */
-  min-height: 80px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.cert-whatget-content p {
-  color: #111;
-  font-weight: 600;
-  font-size: 1.05rem;
-  line-height: 1.5;
-  margin-bottom: 4px;
-}
-
-.cert-whatget-content p:last-child {
-  margin-bottom: 0;
-}
-
-@media (max-width: 992px) {
-  .cert-whatget-list {
-    gap: 24px;
-  }
-
-  .cert-whatget-item {
-    padding-left: 10px;
-  }
-
-  .cert-whatget-label-wrap {
-    width: 200px;
-  }
-
-  .cert-whatget-label {
-    padding: 14px 16px;
-    font-size: 1rem;
-  }
-
-  .cert-whatget-content-wrap {
-    padding-left: 100px;
-  }
-
-  .cert-whatget-content {
-    padding: 20px 24px 20px 110px;
-  }
-}
-
-@media (max-width: 768px) {
-  .cert-whatget-section {
-    padding: 60px 0;
-  }
-
-  .cert-whatget-item {
-    flex-direction: column;
-    padding-left: 0;
-    align-items: flex-start;
-  }
-
-  .cert-whatget-label-wrap {
-    position: relative;
-    width: auto;
-    margin-bottom: -20px;
-    /* Overlap down into the content */
-    margin-left: 20px;
-    z-index: 2;
-  }
-
-  .cert-whatget-label {
-    display: inline-block;
-    padding: 12px 24px;
-  }
-
-  .cert-whatget-content-wrap {
-    padding-left: 0;
-    width: 100%;
-  }
-
-  .cert-whatget-content {
-    border-radius: 20px;
-    padding: 36px 20px 24px;
-    /* Top padding to accommodate overlapping label */
-  }
-
-  .shape-1,
-  .shape-2,
-  .shape-3,
-  .shape-4,
-  .shape-5,
-  .shape-6 {
-    opacity: 0.3;
-    /* Reduce noise on mobile */
-  }
-}
-
-/* ==========================================================
-   GET CERTIFIED PAGE - Sections 4 & 5: Forms
-   ========================================================== */
-
-.cert-enroll-section {
-  padding: 40px 0 60px;
-  background-color: transparent;
-}
-
-/* Enrollment Grid Block */
-.cert-enroll-shell {
-  max-width: 1200px;
-  margin: 0 auto 40px;
-}
-
-.cert-enroll-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 32px;
-  align-items: stretch;
-}
-
-.cert-enroll-image-col {
-  border-radius: 20px;
-  overflow: hidden;
-  height: 100%;
-  min-height: 500px;
-}
-
-.cert-enroll-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-.cert-enroll-form-col {
-  background: var(--surface);
-  border: 1px solid var(--line);
-  box-shadow: 0 12px 28px rgba(90, 63, 38, 0.08);
-  border-radius: 20px;
-  padding: 60px 50px;
-  display: flex;
-  flex-direction: column;
-}
-
-.cert-enroll-form-col h2 {
-  font-family: 'Playfair Display', serif;
-  color: var(--text);
-  font-size: clamp(1.8rem, 3vw, 2.5rem);
-  font-weight: 700;
-  line-height: 1.25;
-  margin-bottom: 24px;
-  text-align: center;
-}
-
-.cert-enroll-form-col>p {
-  color: var(--muted);
-  font-size: 1.05rem;
-  line-height: 1.6;
-  text-align: center;
-  margin-bottom: 24px;
-}
-
-.cert-enroll-bold {
-  font-size: 1.15rem;
-}
-
-.cert-enroll-form {
-  margin-top: 16px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.cert-input-group {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.cert-input-group label {
-  font-family: 'Playfair Display', serif;
-  /* Matching the serif font in screenshot */
-  color: #555;
-  font-size: 1.05rem;
-}
-
-.cert-input-group label span {
-  color: #e74c3c;
-  /* Red asterisk */
-}
-
-.cert-input-group input,
-.cert-input-group textarea {
-  background-color: #ffffff;
-  border: 1px solid #f0f0f0;
-  border-radius: 12px;
-  padding: 16px 20px;
-  font-size: 1rem;
-  color: var(--muted);
-  width: 100%;
-  transition: border-color 0.2s, box-shadow 0.2s;
-  font-family: 'Inter', sans-serif;
-}
-
-.cert-input-group input:focus,
-.cert-input-group textarea:focus {
-  outline: none;
-  border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(219, 138, 47, 0.1);
-}
-
-.cert-input-group textarea {
-  resize: vertical;
-  min-height: 120px;
-}
-
-.cert-btn-submit {
-  background: linear-gradient(135deg, var(--btn-grad-start), var(--btn-grad-end));
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  /* Slightly squarer than primary buttons */
-  padding: 16px 32px;
-  font-family: 'Playfair Display', serif;
-  /* Serif button text per screenshot */
-  font-size: 1.1rem;
-  letter-spacing: 0.05em;
-  cursor: pointer;
-  align-self: flex-start;
-  margin-top: 12px;
-  transition: transform 0.2s, filter 0.2s;
-}
-
-.cert-btn-submit:hover {
-  filter: saturate(1.05);
-  transform: translateY(-1px);
-}
-
-/* Download Outline Block */
-.cert-download-shell {
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.cert-download-panel {
-  background-color: #ffffff;
-  border: 1px solid #e0e0e0;
-  /* Faint inset border matching design */
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06);
-  padding: 60px;
-}
-
-.cert-download-panel h2 {
-  font-family: 'Playfair Display', serif;
-  color: var(--text);
-  font-size: clamp(1.8rem, 3vw, 2.2rem);
-  font-weight: 700;
-  margin-bottom: 40px;
-}
-
-.cert-download-form {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-}
-
-.cert-download-input-row.halves {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 24px;
-}
-
-.cert-btn-submit.download-btn {
-  margin-top: 16px;
-}
-
-@media (max-width: 992px) {
-  .cert-enroll-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .cert-enroll-image-col {
-    min-height: 400px;
-    height: 400px;
-  }
-
-  .cert-download-panel {
-    padding: 40px 30px;
-  }
-}
-
-@media (max-width: 768px) {
-  .cert-enroll-section {
-    padding: 40px 0 80px;
-  }
-
-  .cert-enroll-form-col {
-    padding: 40px 24px;
-  }
-
-  .cert-download-input-row.halves {
-    grid-template-columns: 1fr;
-    gap: 24px;
-  }
-
-  .cert-download-panel {
-    padding: 30px 20px;
-    border: none;
-    box-shadow: none;
-    border-top: 1px solid #eee;
-    border-bottom: 1px solid #eee;
-  }
-}
-
-/* ==========================================================
-   GET CERTIFIED PAGE - Section 6: Coaches Collage
-   ========================================================== */
-
-.cert-coaches-section {
-  padding: 40px 0;
-  background-color: transparent;
-}
-
-.cert-coaches-title {
-  color: var(--text);
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(2rem, 4vw, 3rem);
-  font-weight: 700;
-  text-align: center;
-  margin-bottom: 50px;
-}
-
-.cert-coaches-masonry {
-  column-count: 5;
-  column-gap: 12px;
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
-.cert-coaches-masonry-item {
-  break-inside: avoid;
-  margin-bottom: 12px;
-}
-
-.cert-coach-image {
-  width: 100%;
-  height: auto;
-  border-radius: 4px;
-  /* Slight rounding for a cleaner look */
-  display: block;
-  object-fit: cover;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.cert-coach-image:hover {
-  transform: scale(1.02);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-  z-index: 2;
-  position: relative;
-}
-
-@media (max-width: 1200px) {
-  .cert-coaches-masonry {
-    column-count: 4;
-  }
-}
-
-@media (max-width: 900px) {
-  .cert-coaches-masonry {
-    column-count: 3;
-    column-gap: 10px;
-    padding: 0 16px;
-  }
-
-  .cert-coaches-masonry-item {
-    margin-bottom: 10px;
-  }
-}
-
-@media (max-width: 600px) {
-  .cert-coaches-masonry {
-    column-count: 2;
-    column-gap: 8px;
-  }
-
-  .cert-coaches-masonry-item {
-    margin-bottom: 8px;
-  }
-}
-
-/* ==========================================================
-   GET CERTIFIED PAGE - Section 7: Video Feedback
-   ========================================================== */
-
-.cert-feedback-section {
-  padding: 40px 0;
-  background-color: transparent;
-}
-
-.cert-feedback-title {
-  color: var(--text);
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(2rem, 4vw, 3.2rem);
-  font-weight: 700;
-  text-align: center;
-  margin-bottom: 50px;
-}
-
-.cert-feedback-track-container {
-  overflow-x: auto;
-  /* Allow horizontal scrolling if needed, though they look flexed full-width */
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-
-.cert-feedback-track-container::-webkit-scrollbar {
-  display: none;
-}
-
-.cert-feedback-track {
-  display: flex;
-  gap: 12px;
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
-.cert-feedback-video-block {
-  flex: 1;
-  min-width: 150px;
-  /* Ensure they don't crush too much on mobile before wrapping */
-  aspect-ratio: 9/16;
-  /* Standard portrait video ratio */
-}
-
-.cert-feedback-placeholder {
-  width: 100%;
-  height: 100%;
-  background-color: #000000;
-  border-radius: 4px;
-  /* Minimal rounding */
-}
-
-@media (max-width: 992px) {
-  .cert-feedback-track {
-    flex-wrap: nowrap;
-    /* Keep them inline and scrollable on tablet, or adjust */
-  }
-}
-
-@media (max-width: 768px) {
-  .cert-feedback-section {
-    padding: 60px 0;
-  }
-
-  .cert-feedback-track {
-    gap: 8px;
-  }
-
-  .cert-feedback-video-block {
-    min-width: 120px;
-  }
-}
-
-
-/* ==========================================================
-   GET CERTIFIED PAGE - Section 8: Final FAQs
-   ========================================================== */
-
-.cert-finalfaq-section {
-  padding: 40px 0 60px;
-  background-color: transparent;
-}
-
-.cert-finalfaq-shell {
-  max-width: 1000px;
-  /* Tighter width matching design */
-  margin: 0 auto;
-}
-
-.cert-finalfaq-title {
-  color: var(--text);
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(2rem, 4vw, 3rem);
-  font-weight: 700;
-  text-align: center;
-  margin-bottom: 50px;
-}
-
+.cert-faq-container,
 .cert-finalfaq-container {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
+  display: grid;
+  gap: 12px;
 }
 
-.cert-finalfaq-item {
-  background: transparent;
+.cert-faq-item,
+.cert-finalfaq-question {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--surface);
 }
 
+.cert-faq-question,
 .cert-finalfaq-question {
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 20px 24px;
-  background: var(--surface);
-  border: 1px solid var(--line);
-  /* Light grey block */
-  border-radius: 8px;
-  /* Subtle rounding */
-  cursor: pointer;
+  gap: 10px;
+  background: transparent;
+  padding: 14px 16px;
+  border: 0;
   text-align: left;
-  transition: background-color 0.2s;
+  cursor: pointer;
 }
 
-.cert-finalfaq-question:hover {
-  background: #fcf9f5;
-  border-color: #decab5;
-}
-
+.cert-faq-text,
 .cert-finalfaq-text {
-  font-family: 'Inter', sans-serif;
+  color: #2d313f;
   font-weight: 700;
-  color: #222;
-  font-size: 1.15rem;
 }
 
-.cert-finalfaq-icon {
-  color: #555;
-  font-size: 1.2rem;
-  font-weight: 400;
-  transition: transform 0.3s ease;
+.cert-faq-answer,
+.cert-finalfaq-answer {
+  padding: 0 16px 14px;
+}
+
+.cert-faq-answer p,
+.cert-finalfaq-answer p {
+  color: #5f5753;
+}
+
+.cert-about-cta-row {
+  margin-top: 20px;
+  display: flex;
+  gap: 12px;
+}
+
+.cert-btn-primary,
+.cert-btn-outline,
+.cert-btn-submit {
+  border-radius: 12px;
+  padding: 12px 18px;
+  font-weight: 600;
+}
+
+.cert-btn-primary,
+.cert-btn-submit {
+  border: 0;
+  color: #fff;
+  background: linear-gradient(135deg, var(--btn-grad-start), var(--btn-grad-end));
+}
+
+.cert-btn-outline {
+  border: 1px solid #d9ccb9;
+  background: #fff;
+}
+
+.cert-whatget-list {
+  display: grid;
+  gap: 12px;
+}
+
+.cert-whatget-item {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 0;
+  align-items: stretch;
+}
+
+.cert-whatget-label {
+  height: 100%;
+  border: 1px solid #d2c3b1;
+  border-right: 0;
+  border-radius: 999px 0 0 999px;
   display: flex;
   align-items: center;
-  justify-content: center;
+  padding: 0 22px;
+  font-size: 1.9rem;
+  font-family: 'Playfair Display', serif;
+  color: #2e2928;
+  background: #fff;
 }
 
-.cert-finalfaq-answer-wrap {
-  transition: height 0.4s ease;
+.cert-whatget-content {
+  border: 1px solid #d2c3b1;
+  border-left: 0;
+  border-radius: 0 999px 999px 0;
+  background: linear-gradient(180deg, #f7f2ec 0%, #f2ece6 100%);
+  padding: 12px 18px;
 }
 
-.cert-finalfaq-answer {
-  padding: 24px;
+.cert-whatget-content p {
+  color: #38322d;
+  font-weight: 600;
+  line-height: 1.45;
 }
 
-.cert-finalfaq-answer p {
-  color: #666;
-  /* Lighter grey text */
-  line-height: 1.6;
-  font-size: 1.05rem;
-  margin: 0;
+.cert-enroll-grid {
+  display: grid;
+  grid-template-columns: 64% 36%;
+  gap: 18px;
+}
+
+.cert-enroll-image-col,
+.cert-enroll-form-col,
+.cert-download-panel {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: 0 12px 28px rgba(90, 63, 38, 0.08);
+}
+
+.cert-enroll-image-col {
+  overflow: hidden;
+}
+
+.cert-enroll-image {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.cert-enroll-form-col {
+  padding: 22px;
+}
+
+.cert-enroll-form-col h2 {
+  font-family: 'Playfair Display', serif;
+  color: #2e2928;
+  font-size: clamp(1.7rem, 3vw, 2.8rem);
+  line-height: 1.15;
+}
+
+.cert-enroll-form {
+  margin-top: 10px;
+  display: grid;
+  gap: 10px;
+}
+
+.cert-input-group label {
+  color: #5a5250;
+}
+
+.cert-input-group input,
+.cert-input-group textarea {
+  border: 1px solid #ecded0;
+  border-radius: 10px;
+  padding: 12px;
+  font: inherit;
+  background: #fff;
+}
+
+.cert-download-shell {
+  margin-top: 22px;
+}
+
+.cert-download-panel {
+  padding: 22px;
+}
+
+.cert-download-panel h2 {
+  font-family: 'Playfair Display', serif;
+  color: #2b578f;
+  font-size: clamp(1.8rem, 3vw, 2.7rem);
+  margin-bottom: 14px;
+}
+
+.cert-download-form {
+  display: grid;
+  gap: 12px;
+}
+
+.cert-download-input-row.halves {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.cert-coaches-section,
+.cert-feedback-section,
+.cert-finalfaq-section {
+  background:
+    radial-gradient(circle at 4% 75%, rgba(225, 190, 147, 0.14), transparent 36%),
+    linear-gradient(180deg, #fbf7f2 0%, #f7f3ee 100%);
+  border-top: 1px solid #efe4d8;
+}
+
+.cert-coaches-masonry {
+  column-count: 6;
+  column-gap: 10px;
+}
+
+.cert-coaches-masonry-item {
+  break-inside: avoid;
+  margin-bottom: 10px;
+}
+
+.cert-coach-image {
+  width: 100%;
+  display: block;
+  border-radius: 8px;
+}
+
+.cert-feedback-track {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.cert-feedback-placeholder {
+  width: 100%;
+  aspect-ratio: 9 / 16;
+  border-radius: 8px;
+  background: #000;
+}
+
+@media (max-width: 1100px) {
+  .cert-enroll-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cert-whatget-item {
+    grid-template-columns: 220px 1fr;
+  }
+
+  .cert-coaches-masonry {
+    column-count: 4;
+  }
+
+  .cert-feedback-track {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 }
 
 @media (max-width: 768px) {
-  .cert-finalfaq-section {
-    padding: 30px 0 50px;
+  .cert-carousel-viewport {
+    padding: 14px 20px;
   }
 
-  .cert-finalfaq-question {
-    padding: 16px;
+  .cert-about-cta-row {
+    flex-direction: column;
   }
 
-  .cert-finalfaq-text {
-    font-size: 1.05rem;
+  .cert-whatget-item {
+    grid-template-columns: 1fr;
   }
 
-  .cert-finalfaq-answer {
-    padding: 16px;
+  .cert-whatget-label {
+    border-radius: 999px;
+    border-right: 1px solid #d2c3b1;
+    min-height: 60px;
+    font-size: 1.5rem;
+  }
+
+  .cert-whatget-content {
+    border-left: 1px solid #d2c3b1;
+    border-radius: 14px;
+  }
+
+  .cert-download-input-row.halves {
+    grid-template-columns: 1fr;
+  }
+
+  .cert-coaches-masonry {
+    column-count: 2;
+  }
+
+  .cert-feedback-track {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
-

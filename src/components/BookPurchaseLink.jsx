@@ -3,6 +3,7 @@ import { bookData } from '../data/bookContent';
 
 const BookPurchaseLink = () => {
     const [activeSlide, setActiveSlide] = useState(0);
+    const [showModal, setShowModal] = useState(false);
 
     const goPrev = () => {
         setActiveSlide((prev) => (prev === 0 ? bookData.purchase.sliderImages.length - 1 : prev - 1));
@@ -26,8 +27,18 @@ const BookPurchaseLink = () => {
                         <div className="book-purchase-actions">
                             <h3 className="book-purchase-heading">{bookData.purchase.ctaHeading}</h3>
                             <div className="book-btn-group">
-                                <button className="book-btn-orange">{bookData.purchase.buyNowText}</button>
-                                <button className="book-btn-navy">{bookData.purchase.buyMarathiText}</button>
+                                <a 
+                                    href="https://www.amazon.in/Power-Parent-Parents-Know-Better/dp/014346597X" 
+                                    target="_blank" 
+                                    rel="noreferrer" 
+                                    className="book-btn-orange" 
+                                    style={{ textDecoration: 'none', display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+                                >
+                                    {bookData.purchase.buyNowText}
+                                </a>
+                                <button className="book-btn-navy" onClick={() => setShowModal(true)}>
+                                    {bookData.purchase.buyMarathiText}
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -46,6 +57,20 @@ const BookPurchaseLink = () => {
 
                 </div>
             </div>
+
+            {showModal && (
+                <div className="global-modal-overlay" onClick={() => setShowModal(false)}>
+                    <div className="global-modal-content" onClick={e => e.stopPropagation()}>
+                        <h2 className="global-modal-title">Coming Soon!</h2>
+                        <p className="global-modal-text">The Marathi translation for <strong>Power to the Parent</strong> is currently underway and will be available to purchase very soon.</p>
+                        <div className="global-modal-actions">
+                            <button className="global-modal-btn-primary" onClick={() => setShowModal(false)}>
+                                Close
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </section>
     );
 };
