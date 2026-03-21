@@ -62,6 +62,17 @@ const getHeaders = () => {
 const handleResponse = async (response) => {
   if (!response.ok) {
     const errorData = await response.json().catch(() => ({}))
+    const rawError = String(errorData.error || '').toLowerCase()
+    if (
+      rawError.includes('before initial connection is complete') ||
+      rawError.includes('buffercommands') ||
+      rawError.includes('server selection timed out') ||
+      rawError.includes('replicasetnoprimary')
+    ) {
+      throw new Error(
+        'Database unavailable. Please check MongoDB Atlas network/IP whitelist and credentials.',
+      )
+    }
     throw new Error(errorData.error || 'Request failed.')
   }
   return response.json()

@@ -21,6 +21,7 @@ const AuthLogin = () => {
   // Internal State
   const [otpSessionId, setOtpSessionId] = useState('')
   const [sentTo, setSentTo] = useState('')
+  const [demoOtp, setDemoOtp] = useState('')
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
 
@@ -46,6 +47,7 @@ const AuthLogin = () => {
         const response = await sendOtp(phoneToUse)
         setOtpSessionId(response.otpSessionId)
         setSentTo(response.to || phoneToUse)
+        setDemoOtp(response.mockOtp || '')
         setFlowState('login_otp')
       } else {
         // Did not exist. Route to explicit signup flow
@@ -78,6 +80,7 @@ const AuthLogin = () => {
       const response = await sendOtp(cleanPhone)
       setOtpSessionId(response.otpSessionId)
       setSentTo(response.to || cleanPhone)
+      setDemoOtp(response.mockOtp || '')
       setFlowState('signup_otp')
     } catch (err) {
       setError(err.message || 'Failed to send OTP.')
@@ -115,6 +118,7 @@ const AuthLogin = () => {
     setFlowState('check')
     setOtpSessionId('')
     setOtp('')
+    setDemoOtp('')
   }
 
   return (
@@ -140,12 +144,21 @@ const AuthLogin = () => {
             )}
             {(flowState === 'login_otp' || flowState === 'signup_otp') && (
               <p className="lms-subtitle">
-                OTP sent securely on WhatsApp to <strong>{sentTo}</strong>
+                OTP sent to <strong>{sentTo}</strong>
               </p>
             )}
           </div>
 
           <div className="lms-form">
+            {(flowState === 'login_otp' || flowState === 'signup_otp') && demoOtp ? (
+              <p className="lms-success" style={{ marginBottom: '12px' }}>
+                Demo OTP: <strong>{demoOtp}</strong>
+              </p>
+            ) : (flowState === 'login_otp' || flowState === 'signup_otp') ? (
+              <p className="lms-success" style={{ marginBottom: '12px' }}>
+                Demo OTP: <strong>123456</strong>
+              </p>
+            ) : null}
             
             {/* 1. Initial Check State */}
             {flowState === 'check' && (
@@ -214,7 +227,7 @@ const AuthLogin = () => {
                   type="text"
                   maxLength={6}
                   value={otp}
-                  onChange={(e) => setOtp(e.target.value)}
+                  onChange={(e) => setOtp(e.target.value.replace(/\D/g, ''))}
                   placeholder="------"
                   disabled={loading}
                   style={{ letterSpacing: '8px', textAlign: 'center', fontSize: '18px' }}

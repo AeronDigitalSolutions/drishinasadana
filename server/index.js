@@ -5,7 +5,7 @@ import express from 'express'
 import jwt from 'jsonwebtoken'
 import Razorpay from 'razorpay'
 import twilio from 'twilio'
-import { connectDB } from './db/connection.js'
+import { connectDB, ensureDbConnection, getDbStatus } from './db/connection.js'
 import { Purchase } from './models/Purchase.js'
 import { User } from './models/User.js'
 import { workshopsData } from '../src/data/workshopsContent.js'
@@ -15,6 +15,11 @@ dotenv.config()
 const app = express()
 const API_PORT = Number(process.env.API_PORT || 8787)
 const CLIENT_ORIGIN = process.env.CLIENT_ORIGIN || '*'
+const JWT_SECRET = process.env.JWT_SECRET || ''
+const ADMIN_EMAIL = (process.env.ADMIN_EMAIL || 'admin@gmail.com').toLowerCase().trim()
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'admin@123'
+const USE_MOCK_OTP = String(process.env.USE_MOCK_OTP || '').toLowerCase() === 'true'
+const MOCK_OTP_CODE = String(process.env.MOCK_OTP_CODE || '123456')
 
 app.use(
   cors({
@@ -38,6 +43,9 @@ const twilioContentSid = process.env.TWILIO_WHATSAPP_CONTENT_SID
 
 if (!razorpayKeyId || !razorpayKeySecret) {
   console.warn('[Razorpay] Missing env vars: RAZORPAY_KEY_ID / RAZORPAY_KEY_SECRET')
+}
+if (!JWT_SECRET) {
+  console.warn('[Auth] Missing env var: JWT_SECRET')
 }
 
 const razorpay = new Razorpay({
@@ -66,15 +74,45 @@ const toWhatsappAddress = (value) => {
   return `whatsapp:+${digits}`
 }
 
+const getSafeErrorMessage = (error, fallbackMessage) => {
+  const message = String(error?.message || '')
+  const normalized = message.toLowerCase()
+
+  if (
+    normalized.includes('before initial connection is complete') ||
+    normalized.includes('buffercommands') ||
+    normalized.includes('server selection timed out') ||
+    normalized.includes('replicasetnoprimary') ||
+    normalized.includes('could not connect to any servers')
+  ) {
+    return 'Database unavailable. Please check MongoDB Atlas network/IP whitelist and credentials.'
+  }
+
+  return fallbackMessage
+}
+
 app.get('/api/health', (_, res) => {
+  const db = getDbStatus()
   res.json({
     ok: true,
     service: 'payments-api',
     twilioConfigured: Boolean(twilioClient && twilioWhatsappFrom),
+    otpMode: USE_MOCK_OTP ? 'mock' : 'twilio',
+    db,
   })
 })
 
-app.post('/api/auth/check', async (req, res) => {
+const requireDb = async (_, res, next) => {
+  const dbReady = await ensureDbConnection()
+  if (!dbReady) {
+    return res.status(503).json({
+      error: 'Database unavailable. Please check MongoDB Atlas network/IP whitelist and credentials.',
+    })
+  }
+  next()
+}
+
+app.post('/api/auth/check', requireDb, async (req, res) => {
   try {
     const { identifier } = req.body || {}
     if (!identifier) {
@@ -105,22 +143,18 @@ app.post('/api/auth/check', async (req, res) => {
       email: user?.email || ''
     })
   } catch (error) {
-    return res.status(500).json({ error: error?.message || 'Failed to check user existence.' })
+    return res.status(500).json({ error: getSafeErrorMessage(error, 'Failed to check user existence.') })
   }
 })
 
 app.post('/api/otp/send', async (req, res) => {
   try {
-    if (!twilioClient || !twilioWhatsappFrom) {
-      return res.status(500).json({ error: 'Twilio WhatsApp is not configured on server.' })
-    }
-
     const toPhone = toWhatsappAddress(req.body?.phone)
     if (!toPhone) {
       return res.status(400).json({ error: 'Valid phone number is required for WhatsApp OTP.' })
     }
 
-    const otp = String(Math.floor(100000 + Math.random() * 900000))
+    const otp = USE_MOCK_OTP ? MOCK_OTP_CODE : String(Math.floor(100000 + Math.random() * 900000))
     const otpSessionId = `otp_${crypto.randomUUID()}`
     otpSessions.set(otpSessionId, {
       otp,
@@ -128,6 +162,21 @@ app.post('/api/otp/send', async (req, res) => {
       attempts: 0,
       phone: toPhone,
     })
+
+    if (USE_MOCK_OTP) {
+      console.log(`[Mock OTP] ${toPhone} -> ${otp}`)
+      return res.json({
+        otpSessionId,
+        sent: true,
+        delivery: 'mock',
+        to: toPhone,
+        mockOtp: otp,
+      })
+    }
+
+    if (!twilioClient || !twilioWhatsappFrom) {
+      return res.status(500).json({ error: 'Twilio WhatsApp is not configured on server.' })
+    }
 
     const messagePayload = {
       from: twilioWhatsappFrom,
@@ -156,10 +205,12 @@ app.post('/api/otp/send', async (req, res) => {
   }
 })
 
-app.post('/api/otp/verify', async (req, res) => {
+app.post('/api/otp/verify', requireDb, async (req, res) => {
   try {
     const { otpSessionId, otp, signupData } = req.body || {}
-    if (!otpSessionId || !otp) {
+    const normalizedOtp = String(otp || '').replace(/\D/g, '')
+
+    if (!otpSessionId || !normalizedOtp) {
       return res.status(400).json({ error: 'OTP session and OTP are required.' })
     }
 
@@ -179,7 +230,7 @@ app.post('/api/otp/verify', async (req, res) => {
       return res.status(400).json({ error: 'Too many invalid attempts. Please request new OTP.' })
     }
 
-    if (String(otp).trim() !== session.otp) {
+    if (normalizedOtp !== session.otp) {
       return res.status(400).json({ error: 'Invalid OTP.' })
     }
 
@@ -206,15 +257,15 @@ app.post('/api/otp/verify', async (req, res) => {
       if (changed) await user.save();
     }
 
-    const token = jwt.sign(
-      { userId: user._id, phone: user.phone },
-      process.env.JWT_SECRET,
-      { expiresIn: '30d' }
-    )
+    if (!JWT_SECRET) {
+      return res.status(500).json({ error: 'Server auth configuration is missing.' })
+    }
+
+    const token = jwt.sign({ userId: user._id, phone: user.phone }, JWT_SECRET, { expiresIn: '30d' })
 
     return res.json({ verified: true, token, user })
   } catch (error) {
-    return res.status(500).json({ error: error?.message || 'Failed to verify OTP.' })
+    return res.status(500).json({ error: getSafeErrorMessage(error, 'Failed to verify OTP.') })
   }
 })
 
@@ -266,7 +317,7 @@ app.post('/api/payments/create-order', async (req, res) => {
   }
 })
 
-app.post('/api/payments/verify', async (req, res) => {
+app.post('/api/payments/verify', requireDb, async (req, res) => {
   try {
     if (!razorpayKeySecret) {
       return res.status(500).json({ error: 'Razorpay secret is not configured.' })
@@ -323,7 +374,7 @@ app.post('/api/payments/verify', async (req, res) => {
       orderId: razorpay_order_id,
     })
   } catch (error) {
-    return res.status(500).json({ error: error?.message || 'Payment verification failed.' })
+    return res.status(500).json({ error: getSafeErrorMessage(error, 'Payment verification failed.') })
   }
 })
 
@@ -334,7 +385,7 @@ const authenticate = (req, res, next) => {
   }
   const token = authHeader.split(' ')[1]
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET)
+    const decoded = jwt.verify(token, JWT_SECRET)
     req.user = decoded
     next()
   } catch (err) {
@@ -342,7 +393,89 @@ const authenticate = (req, res, next) => {
   }
 }
 
-app.post('/api/payments/free-access', authenticate, async (req, res) => {
+const authenticateAdmin = (req, res, next) => {
+  const authHeader = req.headers.authorization
+  if (!authHeader || !authHeader.startsWith('Bearer ')) {
+    return res.status(401).json({ error: 'Unauthorized. Missing admin token.' })
+  }
+  const token = authHeader.split(' ')[1]
+  try {
+    const decoded = jwt.verify(token, JWT_SECRET)
+    if (decoded?.role !== 'admin') {
+      return res.status(403).json({ error: 'Forbidden. Admin access required.' })
+    }
+    req.admin = decoded
+    next()
+  } catch (error) {
+    return res.status(401).json({ error: 'Unauthorized. Invalid or expired admin token.' })
+  }
+}
+
+app.post('/api/admin/login', async (req, res) => {
+  try {
+    const email = String(req.body?.email || '').toLowerCase().trim()
+    const password = String(req.body?.password || '')
+
+    if (!email || !password) {
+      return res.status(400).json({ error: 'Email and password are required.' })
+    }
+    if (email !== ADMIN_EMAIL || password !== ADMIN_PASSWORD) {
+      return res.status(401).json({ error: 'Invalid admin credentials.' })
+    }
+    if (!JWT_SECRET) {
+      return res.status(500).json({ error: 'Server auth configuration is missing.' })
+    }
+
+    const token = jwt.sign({ role: 'admin', email: ADMIN_EMAIL }, JWT_SECRET, { expiresIn: '12h' })
+
+    return res.json({
+      success: true,
+      token,
+      admin: { email: ADMIN_EMAIL },
+    })
+  } catch (error) {
+    return res.status(500).json({ error: error?.message || 'Admin login failed.' })
+  }
+})
+
+app.get('/api/admin/users', authenticateAdmin, requireDb, async (_, res) => {
+  try {
+    const users = await User.find({}).sort({ createdAt: -1 }).lean()
+    const groupedPurchases = await Purchase.aggregate([
+      { $group: { _id: '$userId', purchaseCount: { $sum: 1 } } },
+    ])
+    const purchaseCountByUserId = new Map(
+      groupedPurchases.map((item) => [String(item._id), Number(item.purchaseCount || 0)]),
+    )
+
+    const data = users.map((user, index) => {
+      const firstName = user.firstName || ''
+      const lastName = user.lastName || ''
+      const fullName = `${firstName} ${lastName}`.trim() || 'N/A'
+      const id = String(user._id)
+      return {
+        serial: index + 1,
+        id,
+        name: fullName,
+        firstName,
+        lastName,
+        email: user.email || '',
+        phone: user.phone || '',
+        purchaseCount: purchaseCountByUserId.get(id) || 0,
+        createdAt: user.createdAt || null,
+      }
+    })
+
+    return res.json({
+      totalUsers: data.length,
+      users: data,
+    })
+  } catch (error) {
+    return res.status(500).json({ error: getSafeErrorMessage(error, 'Failed to fetch users.') })
+  }
+})
+
+app.post('/api/payments/free-access', authenticate, requireDb, async (req, res) => {
   try {
     const { workshopId } = req.body || {}
     if (!workshopId) {
@@ -377,11 +510,11 @@ app.post('/api/payments/free-access', authenticate, async (req, res) => {
 
     return res.json({ success: true, workshopId })
   } catch (error) {
-    return res.status(500).json({ error: error?.message || 'Failed to grant free access.' })
+    return res.status(500).json({ error: getSafeErrorMessage(error, 'Failed to grant free access.') })
   }
 })
 
-app.get('/api/me', authenticate, async (req, res) => {
+app.get('/api/me', authenticate, requireDb, async (req, res) => {
   try {
     const user = await User.findById(req.user.userId)
     if (!user) {
@@ -390,15 +523,18 @@ app.get('/api/me', authenticate, async (req, res) => {
     const purchases = await Purchase.find({ userId: user._id })
     return res.json({ user, purchases })
   } catch (error) {
-    return res.status(500).json({ error: 'Failed to fetch profile info.' })
+    return res.status(500).json({ error: getSafeErrorMessage(error, 'Failed to fetch profile info.') })
   }
 })
 
 const startServer = async () => {
-  await connectDB()
-  
   const httpServer = app.listen(API_PORT, () => {
     console.log(`[payments-api] running on http://localhost:${API_PORT}`)
+  })
+
+  // Connect database in background so API is reachable immediately on startup.
+  connectDB().catch((error) => {
+    console.error('[MongoDB] Background connection failed:', error?.message || error)
   })
 
   // Keep dev API process alive reliably when launched under npm/concurrently.

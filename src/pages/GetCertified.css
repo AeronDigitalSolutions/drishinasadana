@@ -83,7 +83,7 @@
   background: var(--surface);
   box-shadow: 0 12px 28px rgba(90, 63, 38, 0.08);
   overflow: hidden;
-  min-height: 420px;
+  min-height: 275px;
 }
 
 .cert-card-header {

@@ -13,12 +13,16 @@ import WorkshopPlayer from './pages/WorkshopPlayer'
 import WorkshopDirectAccess from './pages/WorkshopDirectAccess'
 import ScrollToTop from './components/ScrollToTop'
 import AuthLogin from './pages/AuthLogin'
+import AdminLogin from './pages/AdminLogin'
+import AdminDashboard from './pages/AdminDashboard'
 
 function App() {
   return (
     <Router>
       <ScrollToTop />
       <Routes>
+        <Route path="/admin-login" element={<AdminLogin />} />
+        <Route path="/admin/dashboard" element={<AdminDashboard />} />
         <Route element={<Layout />}>
           <Route path="/" element={<Home />} />
           <Route path="/get-certified-today" element={<GetCertified />} />

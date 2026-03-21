@@ -1,0 +1,274 @@
+.admin-page {
+  min-height: 100vh;
+  background: #f5f7fb;
+  padding: 28px 16px;
+}
+
+.admin-shell {
+  max-width: 1240px;
+  margin: 0 auto;
+}
+
+.admin-topbar {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+  padding: 20px 22px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.admin-title {
+  font-size: 30px;
+  line-height: 1.1;
+  color: #111;
+  margin: 0 0 8px;
+}
+
+.admin-subtitle {
+  margin: 0;
+  font-size: 15px;
+  color: #6b7280;
+}
+
+.admin-summary-card {
+  margin-top: 16px;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+  padding: 16px 22px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.admin-summary-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.admin-summary-label {
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.admin-summary-value {
+  font-size: 26px;
+  color: #111;
+  line-height: 1;
+}
+
+.admin-table-card {
+  margin-top: 16px;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+  padding: 18px;
+}
+
+.admin-table-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+}
+
+.admin-search-input {
+  height: 42px;
+  border-radius: 10px;
+  border: 1px solid #d1d5db;
+  padding: 0 12px;
+  min-width: 260px;
+  flex: 1;
+  font-size: 14px;
+}
+
+.admin-export-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.admin-btn-primary,
+.admin-btn-ghost {
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.admin-btn-primary {
+  border: 1px solid #f97316;
+  background: #f97316;
+  color: #fff;
+}
+
+.admin-btn-primary:hover {
+  background: #ea580c;
+  border-color: #ea580c;
+}
+
+.admin-btn-ghost {
+  border: 1px solid #d1d5db;
+  background: #fff;
+  color: #111827;
+}
+
+.admin-btn-ghost:hover {
+  border-color: #9ca3af;
+  background: #f9fafb;
+}
+
+.admin-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.admin-table {
+  width: 100%;
+  min-width: 780px;
+  border-collapse: collapse;
+}
+
+.admin-table thead th {
+  text-align: left;
+  font-size: 13px;
+  color: #374151;
+  font-weight: 600;
+  padding: 12px;
+  border-bottom: 1px solid #e5e7eb;
+  background: #f9fafb;
+}
+
+.admin-table tbody td {
+  font-size: 14px;
+  color: #111827;
+  padding: 12px;
+  border-bottom: 1px solid #f3f4f6;
+  vertical-align: top;
+}
+
+.admin-table tbody tr:hover {
+  background: #fafafa;
+}
+
+.admin-auth-card {
+  max-width: 460px;
+  margin: 72px auto 0;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+  padding: 22px;
+}
+
+.admin-auth-title {
+  margin: 0 0 8px;
+  font-size: 34px;
+  color: #111;
+  line-height: 1.1;
+}
+
+.admin-auth-subtitle {
+  margin: 0 0 16px;
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.admin-auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.admin-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.admin-field label {
+  color: #374151;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.admin-field input {
+  height: 44px;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  padding: 0 12px;
+  font-size: 15px;
+}
+
+.admin-password-wrap {
+  position: relative;
+}
+
+.admin-password-wrap input {
+  width: 100%;
+  padding-right: 42px;
+}
+
+.admin-password-toggle {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 30px;
+  height: 30px;
+  border: 0;
+  background: transparent;
+  color: #6b7280;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.admin-password-toggle:hover {
+  background: #f3f4f6;
+  color: #111827;
+}
+
+.admin-error {
+  margin: 0;
+  font-size: 14px;
+  color: #dc2626;
+  font-weight: 600;
+}
+
+.admin-message {
+  margin: 12px 0 0;
+  color: #6b7280;
+  font-size: 14px;
+}
+
+@media (max-width: 768px) {
+  .admin-title {
+    font-size: 24px;
+  }
+
+  .admin-topbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .admin-btn-ghost,
+  .admin-btn-primary {
+    width: 100%;
+  }
+}

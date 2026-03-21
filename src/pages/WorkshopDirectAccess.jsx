@@ -14,6 +14,7 @@ const WorkshopDirectAccess = () => {
   const [otp, setOtp] = useState('')
   const [otpSessionId, setOtpSessionId] = useState('')
   const [sentTo, setSentTo] = useState('')
+  const [demoOtp, setDemoOtp] = useState('')
   const [error, setError] = useState('')
 
   if (!workshop) {
@@ -39,6 +40,7 @@ const WorkshopDirectAccess = () => {
       const response = await sendOtp(cleanPhone)
       setOtpSessionId(response.otpSessionId)
       setSentTo(response.to || cleanPhone)
+      setDemoOtp(response.mockOtp || '')
     } catch (err) {
       setError(err.message)
     }
@@ -80,11 +82,24 @@ const WorkshopDirectAccess = () => {
             {otpSessionId ? (
               <>
                 <p className="lms-hint">
-                  OTP sent on WhatsApp: <strong>{sentTo}</strong>
+                  OTP sent to: <strong>{sentTo}</strong>
                 </p>
+                {demoOtp ? (
+                  <p className="lms-success">
+                    Demo OTP: <strong>{demoOtp}</strong>
+                  </p>
+                ) : (
+                  <p className="lms-success">
+                    Demo OTP: <strong>123456</strong>
+                  </p>
+                )}
                 <div className="lms-field">
                   <label>Enter OTP</label>
-                  <input value={otp} onChange={(event) => setOtp(event.target.value)} placeholder="6-digit OTP" />
+                  <input
+                    value={otp}
+                    onChange={(event) => setOtp(event.target.value.replace(/\D/g, ''))}
+                    placeholder="6-digit OTP"
+                  />
                 </div>
               </>
             ) : null}
